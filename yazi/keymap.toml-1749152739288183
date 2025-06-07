@@ -1,0 +1,7 @@
+[manager]
+keymap = [
+    { on = [ "j" ], run = "arrow -1" },  # move left
+    { on = [ "k" ], run = "arrow 1" },   # move down  
+    { on = [ "l" ], run = "arrow -1" },  # move up
+    { on = [ "ñ" ], run = "arrow 1" },   # move right
+]

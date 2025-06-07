@@ -1,0 +1,107 @@
+/* Archivo: ~/.config/wofi/style.css */
+
+/* Importar colores de pywal */
+@import url("/home/patitomora/.cache/wal/colors-waybar.css");
+
+/* Ventana principal */
+window {
+    margin: 0px;
+    border: 2px solid @color6;
+    border-radius: 12px;
+    background-color: @background;
+    font-family: "JetBrains Mono", "Fira Code", monospace;
+    font-size: 14px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+}
+
+/* Campo de entrada */
+#input {
+    margin: 10px;
+    border: 1px solid @color8;
+    border-radius: 8px;
+    color: @foreground;
+    background-color: @color0;
+    padding: 12px;
+    font-size: 16px;
+}
+
+#input:focus {
+    border-color: @color4;
+    outline: none;
+    box-shadow: 0 0 0 2px fade(@color4, 20%);
+}
+
+/* Lista de elementos */
+#inner-box {
+    margin: 5px;
+    border: none;
+    background-color: transparent;
+}
+
+#outer-box {
+    margin: 5px;
+    border: none;
+    background-color: transparent;
+}
+
+/* Scroll */
+#scroll {
+    margin: 0px;
+    border: none;
+    background-color: transparent;
+}
+
+/* Elementos de la lista */
+#entry {
+    padding: 8px 12px;
+    margin: 2px 8px;
+    border-radius: 6px;
+    color: @foreground;
+    background-color: transparent;
+    transition: all 0.2s ease;
+}
+
+#entry:selected {
+    color: @background;
+    background-color: @color1;
+    font-weight: bold;
+}
+
+#entry:hover {
+    background-color: fade(@color8, 30%);
+}
+
+/* Iconos */
+#entry image {
+    margin-right: 8px;
+    padding-right: 4px;
+}
+
+/* Texto de los elementos */
+#entry label {
+    color: inherit;
+}
+
+/* Separadores para diferentes modos */
+#entry.drun {
+    border-left: 3px solid @color2;
+}
+
+#entry.run {
+    border-left: 3px solid @color3;
+}
+
+#entry.filebrowser {
+    border-left: 3px solid @color5;
+}
+
+/* Estilo para calculadora */
+#entry.calc {
+    border-left: 3px solid @color6;
+    font-family: monospace;
+}
+
+/* Texto de placeholder */
+#input::placeholder {
+    color: fade(@foreground, 50%);
+}

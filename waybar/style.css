@@ -1,0 +1,125 @@
+@import "/home/patitomora/.cache/wal/colors-waybar.css";
+
+* {
+    border: none;
+    border-radius: 0;
+    font-family: "JetBrainsMono Nerd Font", "JetBrains Mono", monospace;
+    font-size: 10px;
+    min-height: 0;
+}
+
+window#waybar {
+    background-color: rgba(33, 15, 5, 0.9); /* Using background with transparency */
+    border-top: 1px solid rgba(153, 147, 143, 0.5);
+    transition-property: background-color;
+    transition-duration: 0.5s;
+}
+
+window#waybar.hidden {
+    opacity: 0.2;
+}
+
+#workspaces {
+    margin: 0;
+}
+
+#workspaces button {
+    padding: 0 4px;
+    background-color: transparent;
+    color: @foreground;
+    border-bottom: 1px solid transparent;
+}
+
+#workspaces button:hover {
+    background: rgba(157, 73, 8, 0.3); /* Using color1 with transparency */
+}
+
+#workspaces button.active {
+    background-color: @color1;
+    border-bottom: 1px solid @color14;
+    color: @color14;
+}
+
+#workspaces button.urgent {
+    background-color: @color9;
+}
+
+#window,
+#clock,
+#cpu,
+#memory,
+#temperature,
+#battery,
+#network,
+#pulseaudio {
+    padding: 0 4px;
+    color: @foreground;
+}
+
+#clock {
+    font-weight: bold;
+    color: @color14;
+}
+
+#cpu {
+    color: @foreground;
+}
+
+#memory {
+    color: @foreground;
+}
+
+#temperature {
+    color: @foreground;
+}
+
+#temperature.critical {
+    background-color: @color9;
+    color: @foreground;
+    animation-name: blink;
+    animation-duration: 0.5s;
+    animation-timing-function: linear;
+    animation-iteration-count: infinite;
+    animation-direction: alternate;
+}
+
+#battery {
+    color: @foreground;
+}
+
+#battery.charging, #battery.plugged {
+    color: @color13;
+}
+
+#battery.critical:not(.charging) {
+    background-color: @color9;
+    color: @foreground;
+    animation-name: blink;
+    animation-duration: 0.5s;
+    animation-timing-function: linear;
+    animation-iteration-count: infinite;
+    animation-direction: alternate;
+}
+
+@keyframes blink {
+    to {
+        background-color: @color14;
+        color: @background;
+    }
+}
+
+#network {
+    color: @color5;
+}
+
+#network.disconnected {
+    color: @color9;
+}
+
+#pulseaudio {
+    color: @color12;
+}
+
+#pulseaudio.muted {
+    color: @color8;
+}

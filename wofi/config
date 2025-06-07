@@ -1,0 +1,33 @@
+# Configuración minimalista de wofi
+# Archivo: ~/.config/wofi/config
+
+# Configuración básica
+width=800
+height=600
+location=top-center
+show=drun
+prompt=
+filter_rate=100
+allow_markup=true
+no_actions=true
+halign=fill
+orientation=vertical
+content_halign=fill
+insensitive=true
+allow_images=true
+image_size=32
+hide_scroll=true
+print_command=false
+layer=overlay
+columns=1
+normal_window=false
+term=alacritty
+matching=contains
+gtk_dark=true
+
+# Keybindings básicos
+key_up=Up
+key_down=Down
+key_forward=Tab
+key_submit=Return
+key_exit=Escape
