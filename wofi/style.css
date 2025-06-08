@@ -1,34 +1,57 @@
 /* Archivo: ~/.config/wofi/style.css */
-
 /* Importar colores de pywal */
 @import url("/home/patitomora/.cache/wal/colors-waybar.css");
 
-/* Ventana principal */
+/* Ventana principal con glassmorphism */
 window {
     margin: 0px;
     border: 2px solid @color6;
-    border-radius: 12px;
-    background-color: @background;
+    border-radius: 20px;
+    background-color: rgba(0, 0, 0, 0.6);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
     font-family: "JetBrains Mono", "Fira Code", monospace;
     font-size: 14px;
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+    box-shadow: 
+        0 10px 30px rgba(0, 0, 0, 0.3),
+        0 0 0 1px rgba(255, 255, 255, 0.05) inset;
+    animation: fadeIn 0.3s cubic-bezier(0.4, 0.0, 0.2, 1);
 }
 
-/* Campo de entrada */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: scale(0.95) translateY(-10px);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1) translateY(0);
+    }
+}
+
+/* Campo de entrada con glassmorphism */
 #input {
     margin: 10px;
     border: 1px solid @color8;
-    border-radius: 8px;
+    border-radius: 12px;
     color: @foreground;
-    background-color: @color0;
+    background-color: rgba(0, 0, 0, 0.25);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
     padding: 12px;
     font-size: 16px;
+    transition: all 0.3s cubic-bezier(0.4, 0.0, 0.2, 1);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
 }
 
 #input:focus {
     border-color: @color4;
     outline: none;
-    box-shadow: 0 0 0 2px fade(@color4, 20%);
+    background-color: @color0;
+    box-shadow: 
+        0 0 0 2px fade(@color4, 20%),
+        0 4px 16px rgba(0, 0, 0, 0.2);
+    transform: translateY(-1px);
 }
 
 /* Lista de elementos */
@@ -51,35 +74,70 @@ window {
     background-color: transparent;
 }
 
-/* Elementos de la lista */
+/* Elementos de la lista con glassmorphism */
 #entry {
     padding: 8px 12px;
     margin: 2px 8px;
-    border-radius: 6px;
+    border-radius: 10px;
     color: @foreground;
     background-color: transparent;
-    transition: all 0.2s ease;
+    transition: all 0.3s cubic-bezier(0.4, 0.0, 0.2, 1);
+    position: relative;
+    overflow: hidden;
+}
+
+#entry::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(255, 255, 255, 0.02);
+    border-radius: 10px;
+    transition: all 0.3s cubic-bezier(0.4, 0.0, 0.2, 1);
+    opacity: 0;
 }
 
 #entry:selected {
     color: @background;
     background-color: @color1;
+    backdrop-filter: blur(15px);
+    -webkit-backdrop-filter: blur(15px);
     font-weight: bold;
+    transform: translateY(-1px);
+    box-shadow: 
+        0 4px 16px rgba(0, 0, 0, 0.15),
+        0 0 0 1px rgba(255, 255, 255, 0.1) inset;
 }
 
-#entry:hover {
+#entry:selected::before {
+    opacity: 1;
+}
+
+#entry:hover:not(:selected) {
     background-color: fade(@color8, 30%);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    transform: translateY(-1px);
+    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.1);
+}
+
+#entry:hover:not(:selected)::before {
+    opacity: 0.5;
 }
 
 /* Iconos */
 #entry image {
     margin-right: 8px;
     padding-right: 4px;
+    filter: drop-shadow(0 1px 2px rgba(0, 0, 0, 0.2));
 }
 
 /* Texto de los elementos */
 #entry label {
     color: inherit;
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
 }
 
 /* Separadores para diferentes modos */
@@ -104,4 +162,21 @@ window {
 /* Texto de placeholder */
 #input::placeholder {
     color: fade(@foreground, 50%);
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+}
+
+/* Scrollbar styling for webkit browsers */
+#scroll scrollbar {
+    background: transparent;
+    width: 6px;
+}
+
+#scroll scrollbar slider {
+    background: fade(@color8, 40%);
+    border-radius: 3px;
+    transition: background 0.3s ease;
+}
+
+#scroll scrollbar slider:hover {
+    background: fade(@color8, 60%);
 }
