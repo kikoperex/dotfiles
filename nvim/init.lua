@@ -1,3 +1,4 @@
+vim.g.mapleader = " "
 vim.opt.number = true         
 vim.wo.relativenumber = true
 vim.opt.signcolumn = "no"   
@@ -15,21 +16,46 @@ vim.opt.scrolloff = 8
 vim.opt.colorcolumn = "80"
 vim.opt.smartindent= true
 
+vim.keymap.set('n', '<leader>f', vim.cmd.Ex)
+
+-- Telescope
+local builtin = require('telescope.builtin')
+vim.keymap.set('n', '<leader>pf', builtin.find_files, { desc = 'Telescope find files' })
+vim.keymap.set('n', '<C-p>', builtin.git_files, { desc = 'Telescope find files' })
 
 -- Remap ctrl u and ctrl d to center the cursor
-vim.api.nvim_set_keymap('n', '<C-d>', '<C-d>zz', { noremap = true, silent = true })
-vim.api.nvim_set_keymap('n', '<C-u>', '<C-u>zz', { noremap = true, silent = true })
+vim.keymap.set('n', '<C-d>', '<C-d>zz', { silent = true, desc = 'Half page down and center' })
+vim.keymap.set('n', '<C-u>', '<C-u>zz', { silent = true, desc = 'Half page up and center' })
+vim.keymap.set('n', 'n', 'nzzzv', { silent = true, desc = 'Next search result and center' })
+vim.keymap.set('n', 'N', 'Nzzzv', { silent = true, desc = 'Previous search result and center' })
 
--- Remap movement keys
-vim.api.nvim_set_keymap('n', 'ñ', 'l', { noremap = true, silent = true })  -- ñ moves right
-vim.api.nvim_set_keymap('n', 'j', 'h', { noremap = true, silent = true })  -- j moves left
-vim.api.nvim_set_keymap('n', 'k', 'j', { noremap = true, silent = true })  -- k moves down
-vim.api.nvim_set_keymap('n', 'l', 'k', { noremap = true, silent = true })  -- l moves up
+-- Remap movement keys - H J K L to J K L Ñ
+vim.keymap.set('n', 'ñ', 'l', { silent = true, desc = 'Move right' })
+vim.keymap.set('n', 'j', 'h', { silent = true, desc = 'Move left' })
+vim.keymap.set('n', 'k', 'j', { silent = true, desc = 'Move down' })
+vim.keymap.set('n', 'l', 'k', { silent = true, desc = 'Move up' })
+
 -- Remap for visual mode
-vim.api.nvim_set_keymap('v', 'ñ', 'l', { noremap = true, silent = true })  -- ñ moves right
-vim.api.nvim_set_keymap('v', 'j', 'h', { noremap = true, silent = true })  -- j moves left
-vim.api.nvim_set_keymap('v', 'k', 'j', { noremap = true, silent = true })  -- k moves down
-vim.api.nvim_set_keymap('v', 'l', 'k', { noremap = true, silent = true })  -- l moves up
+vim.keymap.set('v', 'ñ', 'l', { silent = true, desc = 'Move right' })
+vim.keymap.set('v', 'j', 'h', { silent = true, desc = 'Move left' })
+vim.keymap.set('v', 'k', 'j', { silent = true, desc = 'Move down' })
+vim.keymap.set('v', 'l', 'k', { silent = true, desc = 'Move up' })
+-- Remap movement keys - H J K L to J K L Ñ (uppercase)
+vim.keymap.set('n', 'Ñ', 'L', { silent = true, desc = 'Move to bottom of screen' })
+vim.keymap.set('n', 'J', 'H', { silent = true, desc = 'Move to top of screen' })
+vim.keymap.set('n', 'K', 'J', { silent = true, desc = 'Join lines' })
+vim.keymap.set('n', 'L', 'K', { silent = true, desc = 'Lookup keyword' })
+
+-- Remap for visual mode (uppercase)
+vim.keymap.set('v', 'Ñ', 'L', { silent = true, desc = 'Move to bottom of screen' })
+vim.keymap.set('v', 'J', 'H', { silent = true, desc = 'Move to top of screen' })
+vim.keymap.set('v', 'K', 'J', { silent = true, desc = 'Join lines' })
+vim.keymap.set('v', 'L', 'K', { silent = true, desc = 'Lookup keyword' })
+-- Optional: Also remap in operator-pending mode for consistency
+vim.keymap.set('o', 'j', 'h', { desc = 'Move left' })
+vim.keymap.set('o', 'k', 'j', { desc = 'Move down' })
+vim.keymap.set('o', 'l', 'k', { desc = 'Move up' })
+vim.keymap.set('o', 'ñ', 'l', { desc = 'Move right' })
 
 -- vim.api.nvim_set_keymap('v', 'K', "m: '>+1<CR>gv=gv", { noremap = true, silent = true })  -- l moves up
 -- vim.api.nvim_set_keymap('v', 'L', "m: '<-2<CR>gv=gv", { noremap = true, silent = true })  -- l moves up
@@ -141,3 +167,31 @@ end
 
 -- Apply the colors
 apply_wal_colors()
+
+
+
+-- This file can be loaded by calling `lua require('plugins')` from your init.vim
+
+-- Only required if you have packer configured as `opt`
+vim.cmd [[packadd packer.nvim]]
+
+return require('packer').startup(function(use)
+  -- Packer can manage itself
+  use 'wbthomason/packer.nvim'
+
+  use {
+	  'nvim-telescope/telescope.nvim', tag = '0.1.8',
+	  -- or                            , branch = '0.1.x',
+	  requires = { {'nvim-lua/plenary.nvim'} }
+  }
+
+  use {
+	  'nvim-treesitter/nvim-treesitter',
+	  run = function()
+		  local ts_update = require('nvim-treesitter.install').update({ with_sync = true })
+		  ts_update()
+	  end,
+  }
+
+end)
+
