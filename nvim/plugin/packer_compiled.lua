@@ -79,6 +79,11 @@ _G.packer_plugins = {
     path = "/home/patitomora/.local/share/nvim/site/pack/packer/start/nvim-treesitter",
     url = "https://github.com/nvim-treesitter/nvim-treesitter"
   },
+  ["nvim-treesitter-textobjects"] = {
+    loaded = true,
+    path = "/home/patitomora/.local/share/nvim/site/pack/packer/start/nvim-treesitter-textobjects",
+    url = "https://github.com/nvim-treesitter/nvim-treesitter-textobjects"
+  },
   ["packer.nvim"] = {
     loaded = true,
     path = "/home/patitomora/.local/share/nvim/site/pack/packer/start/packer.nvim",
@@ -93,6 +98,11 @@ _G.packer_plugins = {
     loaded = true,
     path = "/home/patitomora/.local/share/nvim/site/pack/packer/start/telescope.nvim",
     url = "https://github.com/nvim-telescope/telescope.nvim"
+  },
+  ["vim-be-good"] = {
+    loaded = true,
+    path = "/home/patitomora/.local/share/nvim/site/pack/packer/start/vim-be-good",
+    url = "https://github.com/ThePrimeagen/vim-be-good"
   }
 }
 

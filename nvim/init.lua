@@ -9,9 +9,9 @@ vim.opt.hlsearch = false
 vim.opt.swapfile = false    
 vim.opt.undofile = true      
 vim.opt.autoread = true      
-vim.opt.syntax = "on"         
+-- vim.opt.syntax = "on"         
 vim.cmd('filetype plugin indent on')  
-vim.cmd('syntax enable')
+-- vim.cmd('syntax enable')
 vim.opt.scrolloff = 8
 vim.opt.colorcolumn = "80"
 vim.opt.smartindent= true
@@ -63,10 +63,11 @@ vim.keymap.set('o', 'ñ', 'l', { desc = 'Move right' })
 vim.keymap.set("v", "K", ":m '>+1<CR>gv=gv")
 vim.keymap.set("v", "L", ":m '<-2<CR>gv=gv")
 
+-- Enhanced pywal configuration that works perfectly with Treesitter
 -- Source the pywal colors
 vim.cmd('source ~/.cache/wal/colors-wal.vim')
 
--- Function to apply pywal colors
+-- Function to apply pywal colors (enhanced for Treesitter)
 local function apply_wal_colors()
     local colors = {
         background = vim.g.background,
@@ -90,19 +91,76 @@ local function apply_wal_colors()
         color15 = vim.g.color15,
     }
     
-    -- Apply the colors
+    -- Clear existing highlights
     vim.cmd('highlight clear')
-    vim.cmd('syntax reset')
     vim.o.background = 'dark'
     
-    -- Set basic highlights with default background
+    -- Basic UI highlights
     vim.api.nvim_set_hl(0, 'Normal', { fg = colors.foreground, bg = 'NONE' })
     vim.api.nvim_set_hl(0, 'Cursor', { fg = colors.background, bg = colors.cursor })
     vim.api.nvim_set_hl(0, 'CursorLine', { bg = colors.color0 })
     vim.api.nvim_set_hl(0, 'LineNr', { fg = colors.color8 })
     vim.api.nvim_set_hl(0, 'CursorLineNr', { fg = colors.color15, bold = true })
+    vim.api.nvim_set_hl(0, 'ColorColumn', { bg = colors.color0 })
     
-    -- General syntax highlighting
+    -- Treesitter highlight groups (these work with any language)
+    vim.api.nvim_set_hl(0, '@comment', { fg = colors.color8, italic = true })
+    vim.api.nvim_set_hl(0, '@string', { fg = colors.color2 })
+    vim.api.nvim_set_hl(0, '@number', { fg = colors.color9 })
+    vim.api.nvim_set_hl(0, '@boolean', { fg = colors.color9 })
+    vim.api.nvim_set_hl(0, '@float', { fg = colors.color9 })
+    vim.api.nvim_set_hl(0, '@function', { fg = colors.color4 })
+    vim.api.nvim_set_hl(0, '@function.call', { fg = colors.color4 })
+    vim.api.nvim_set_hl(0, '@function.builtin', { fg = colors.color12 })
+    vim.api.nvim_set_hl(0, '@method', { fg = colors.color4 })
+    vim.api.nvim_set_hl(0, '@method.call', { fg = colors.color4 })
+    vim.api.nvim_set_hl(0, '@keyword', { fg = colors.color1, bold = true })
+    vim.api.nvim_set_hl(0, '@keyword.function', { fg = colors.color1, bold = true })
+    vim.api.nvim_set_hl(0, '@keyword.return', { fg = colors.color1, bold = true })
+    vim.api.nvim_set_hl(0, '@keyword.operator', { fg = colors.color1, bold = true })
+    vim.api.nvim_set_hl(0, '@conditional', { fg = colors.color1, bold = true })
+    vim.api.nvim_set_hl(0, '@repeat', { fg = colors.color1, bold = true })
+    vim.api.nvim_set_hl(0, '@exception', { fg = colors.color1, bold = true })
+    vim.api.nvim_set_hl(0, '@include', { fg = colors.color1, bold = true })
+    vim.api.nvim_set_hl(0, '@type', { fg = colors.color3 })
+    vim.api.nvim_set_hl(0, '@type.builtin', { fg = colors.color11 })
+    vim.api.nvim_set_hl(0, '@type.definition', { fg = colors.color3, bold = true })
+    vim.api.nvim_set_hl(0, '@variable', { fg = colors.foreground })
+    vim.api.nvim_set_hl(0, '@variable.builtin', { fg = colors.color6, italic = true })
+    vim.api.nvim_set_hl(0, '@constant', { fg = colors.color5 })
+    vim.api.nvim_set_hl(0, '@constant.builtin', { fg = colors.color13 })
+    vim.api.nvim_set_hl(0, '@constant.macro', { fg = colors.color5 })
+    vim.api.nvim_set_hl(0, '@constructor', { fg = colors.color3 })
+    vim.api.nvim_set_hl(0, '@operator', { fg = colors.color15 })
+    vim.api.nvim_set_hl(0, '@punctuation', { fg = colors.color7 })
+    vim.api.nvim_set_hl(0, '@punctuation.bracket', { fg = colors.color7 })
+    vim.api.nvim_set_hl(0, '@punctuation.delimiter', { fg = colors.color7 })
+    vim.api.nvim_set_hl(0, '@punctuation.special', { fg = colors.color13 })
+    
+    -- Python-specific Treesitter highlights
+    vim.api.nvim_set_hl(0, '@variable.parameter.python', { fg = colors.color14 })
+    vim.api.nvim_set_hl(0, '@function.builtin.python', { fg = colors.color12 })
+    vim.api.nvim_set_hl(0, '@constant.builtin.python', { fg = colors.color9 }) -- None, True, False
+    vim.api.nvim_set_hl(0, '@keyword.import.python', { fg = colors.color1, bold = true })
+    vim.api.nvim_set_hl(0, '@decorator.python', { fg = colors.color5 })
+    vim.api.nvim_set_hl(0, '@string.documentation.python', { fg = colors.color8, italic = true })
+    
+    -- JavaScript/TypeScript specific
+    vim.api.nvim_set_hl(0, '@constructor.javascript', { fg = colors.color3 })
+    vim.api.nvim_set_hl(0, '@keyword.export.javascript', { fg = colors.color1, bold = true })
+    vim.api.nvim_set_hl(0, '@variable.parameter.javascript', { fg = colors.color14 })
+    
+    -- Markup languages (HTML, Markdown, etc.)
+    vim.api.nvim_set_hl(0, '@tag', { fg = colors.color1 })
+    vim.api.nvim_set_hl(0, '@tag.attribute', { fg = colors.color3 })
+    vim.api.nvim_set_hl(0, '@tag.delimiter', { fg = colors.color7 })
+    vim.api.nvim_set_hl(0, '@markup.heading', { fg = colors.color4, bold = true })
+    vim.api.nvim_set_hl(0, '@markup.strong', { fg = colors.color15, bold = true })
+    vim.api.nvim_set_hl(0, '@markup.italic', { fg = colors.color15, italic = true })
+    vim.api.nvim_set_hl(0, '@markup.link', { fg = colors.color6, underline = true })
+    vim.api.nvim_set_hl(0, '@markup.raw', { fg = colors.color2 })
+    
+    -- Fallback to traditional syntax groups for compatibility
     vim.api.nvim_set_hl(0, 'Comment', { fg = colors.color8, italic = true })
     vim.api.nvim_set_hl(0, 'String', { fg = colors.color2 })
     vim.api.nvim_set_hl(0, 'Number', { fg = colors.color9 })
@@ -118,41 +176,15 @@ local function apply_wal_colors()
     vim.api.nvim_set_hl(0, 'Operator', { fg = colors.color15 })
     vim.api.nvim_set_hl(0, 'Delimiter', { fg = colors.color7 })
     
-    -- Python-specific highlighting
-    vim.api.nvim_set_hl(0, 'pythonBuiltin', { fg = colors.color4 })
-    vim.api.nvim_set_hl(0, 'pythonFunction', { fg = colors.color4 })
-    vim.api.nvim_set_hl(0, 'pythonDecorator', { fg = colors.color5 })
-    vim.api.nvim_set_hl(0, 'pythonDecoratorName', { fg = colors.color5 })
-    vim.api.nvim_set_hl(0, 'pythonStatement', { fg = colors.color1, bold = true })
-    vim.api.nvim_set_hl(0, 'pythonConditional', { fg = colors.color1, bold = true })
-    vim.api.nvim_set_hl(0, 'pythonRepeat', { fg = colors.color1, bold = true })
-    vim.api.nvim_set_hl(0, 'pythonException', { fg = colors.color1, bold = true })
-    vim.api.nvim_set_hl(0, 'pythonOperator', { fg = colors.color15 })
-    vim.api.nvim_set_hl(0, 'pythonImport', { fg = colors.color1, bold = true })
-    vim.api.nvim_set_hl(0, 'pythonClass', { fg = colors.color3, bold = true })
-    vim.api.nvim_set_hl(0, 'pythonClassName', { fg = colors.color3, bold = true })
-    vim.api.nvim_set_hl(0, 'pythonSelf', { fg = colors.color6, italic = true })
-    vim.api.nvim_set_hl(0, 'pythonDottedName', { fg = colors.color6 })
-    vim.api.nvim_set_hl(0, 'pythonString', { fg = colors.color2 })
-    vim.api.nvim_set_hl(0, 'pythonRawString', { fg = colors.color10 })
-    vim.api.nvim_set_hl(0, 'pythonStrFormat', { fg = colors.color13 })
-    vim.api.nvim_set_hl(0, 'pythonStrFormatting', { fg = colors.color13 })
-    vim.api.nvim_set_hl(0, 'pythonDocstring', { fg = colors.color8, italic = true })
-    vim.api.nvim_set_hl(0, 'pythonComment', { fg = colors.color8, italic = true })
-    vim.api.nvim_set_hl(0, 'pythonTodo', { fg = colors.color11, bold = true })
-    
-    -- Additional Python keywords for better syntax support
-    vim.api.nvim_set_hl(0, 'pythonAsync', { fg = colors.color1, bold = true })
-    vim.api.nvim_set_hl(0, 'pythonAwait', { fg = colors.color1, bold = true })
-    vim.api.nvim_set_hl(0, 'pythonInclude', { fg = colors.color1, bold = true })
-    vim.api.nvim_set_hl(0, 'pythonNone', { fg = colors.color9 })
-    vim.api.nvim_set_hl(0, 'pythonEscape', { fg = colors.color13 })
-    
-    -- Error and warning highlights
+    -- Error and diagnostic highlights
     vim.api.nvim_set_hl(0, 'Error', { fg = colors.color1, bold = true })
     vim.api.nvim_set_hl(0, 'Warning', { fg = colors.color11, bold = true })
     vim.api.nvim_set_hl(0, 'ErrorMsg', { fg = colors.color1, bold = true })
     vim.api.nvim_set_hl(0, 'WarningMsg', { fg = colors.color11, bold = true })
+    vim.api.nvim_set_hl(0, 'DiagnosticError', { fg = colors.color1 })
+    vim.api.nvim_set_hl(0, 'DiagnosticWarn', { fg = colors.color11 })
+    vim.api.nvim_set_hl(0, 'DiagnosticInfo', { fg = colors.color4 })
+    vim.api.nvim_set_hl(0, 'DiagnosticHint', { fg = colors.color6 })
     
     -- UI elements
     vim.api.nvim_set_hl(0, 'StatusLine', { fg = colors.foreground, bg = colors.color0 })
@@ -163,11 +195,28 @@ local function apply_wal_colors()
     vim.api.nvim_set_hl(0, 'Visual', { bg = colors.color8 })
     vim.api.nvim_set_hl(0, 'Search', { fg = colors.background, bg = colors.color11 })
     vim.api.nvim_set_hl(0, 'IncSearch', { fg = colors.background, bg = colors.color13 })
+    
+    -- Telescope highlights
+    vim.api.nvim_set_hl(0, 'TelescopeNormal', { fg = colors.foreground, bg = colors.color0 })
+    vim.api.nvim_set_hl(0, 'TelescopeBorder', { fg = colors.color8, bg = colors.color0 })
+    vim.api.nvim_set_hl(0, 'TelescopePromptBorder', { fg = colors.color8, bg = colors.color0 })
+    vim.api.nvim_set_hl(0, 'TelescopeResultsBorder', { fg = colors.color8, bg = colors.color0 })
+    vim.api.nvim_set_hl(0, 'TelescopePreviewBorder', { fg = colors.color8, bg = colors.color0 })
+    vim.api.nvim_set_hl(0, 'TelescopeSelection', { fg = colors.foreground, bg = colors.color8 })
+    vim.api.nvim_set_hl(0, 'TelescopeMatching', { fg = colors.color11, bold = true })
 end
 
 -- Apply the colors
 apply_wal_colors()
 
+-- Auto-apply colors when colorscheme changes (useful when pywal updates)
+vim.api.nvim_create_autocmd("ColorScheme", {
+    pattern = "*",
+    callback = function()
+        -- Small delay to ensure pywal colors are loaded
+        vim.defer_fn(apply_wal_colors, 50)
+    end,
+})
 
 
 -- This file can be loaded by calling `lua require('plugins')` from your init.vim
@@ -191,7 +240,9 @@ return require('packer').startup(function(use)
 		  local ts_update = require('nvim-treesitter.install').update({ with_sync = true })
 		  ts_update()
 	  end,
+  use 'nvim-treesitter/nvim-treesitter-textobjects'
   }
+  use {"ThePrimeagen/vim-be-good"}
 
 end)
 

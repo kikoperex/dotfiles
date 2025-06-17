@@ -1,6 +1,9 @@
 # Include pywal colors
 include /home/patitomora/.cache/wal/colors-zathura
 
+# Font configuration
+set font "JetBrains Mono 12"
+
 # Custom settings (override pywal defaults if needed)
 set recolor "true"
 set default-bg rgba(0,0,0,0.7)
