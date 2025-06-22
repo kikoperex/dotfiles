@@ -99,6 +99,11 @@ _G.packer_plugins = {
     path = "/home/patitomora/.local/share/nvim/site/pack/packer/start/telescope.nvim",
     url = "https://github.com/nvim-telescope/telescope.nvim"
   },
+  ["vim-be-better"] = {
+    loaded = true,
+    path = "/home/patitomora/.local/share/nvim/site/pack/packer/start/vim-be-better",
+    url = "https://github.com/szymonwilczek/vim-be-better"
+  },
   ["vim-be-good"] = {
     loaded = true,
     path = "/home/patitomora/.local/share/nvim/site/pack/packer/start/vim-be-good",
