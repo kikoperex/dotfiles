@@ -123,3 +123,24 @@ window#waybar.hidden {
 #pulseaudio.muted {
     color: @color8;
 }
+
+/* Recording status module */
+#custom-recording {
+    padding: 0 4px;
+    color: @foreground;
+}
+
+#custom-recording.recording {
+    background-color: @color9;
+    color: @foreground;
+    animation-name: blink;
+    animation-duration: 1s;
+    animation-timing-function: linear;
+    animation-iteration-count: infinite;
+    animation-direction: alternate;
+}
+
+#custom-recording.not-recording {
+    background-color: transparent;
+    color: transparent;
+}

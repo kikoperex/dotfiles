@@ -5,7 +5,7 @@
     "spacing": 4,
     "modules-left": ["hyprland/workspaces"],
     "modules-center": ["clock"],
-    "modules-right": ["cpu", "memory", "temperature", "pulseaudio", "network", "battery"],
+    "modules-right": ["custom/recording", "cpu", "memory", "temperature", "pulseaudio", "network", "battery"],
     
     "hyprland/workspaces": {
         "disable-scroll": true,
@@ -13,6 +13,14 @@
         "format": "{id}",
         "active-only": false,
         "show-special": false
+    },
+    
+    "custom/recording": {
+        "exec": "~/.config/scripts/recording-status.sh",
+        "return-type": "json",
+        "interval": 2,
+        "format": "{}",
+        "on-click": "pkill gpu-screen"
     },
     
     "clock": {
