@@ -8,7 +8,7 @@
     "modules-right": ["custom/recording", "cpu", "memory", "temperature", "pulseaudio", "network", "battery"],
     
     "hyprland/workspaces": {
-        "disable-scroll": true,
+        "disable-scroll": false,
         "all-outputs": true,
         "format": "{id}",
         "active-only": false,
