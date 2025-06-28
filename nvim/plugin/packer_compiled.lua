@@ -74,6 +74,11 @@ end
 time([[try_loadstring definition]], false)
 time([[Defining packer_plugins]], true)
 _G.packer_plugins = {
+  ["nvim-lspconfig"] = {
+    loaded = true,
+    path = "/home/patitomora/.local/share/nvim/site/pack/packer/start/nvim-lspconfig",
+    url = "https://github.com/neovim/nvim-lspconfig"
+  },
   ["nvim-treesitter"] = {
     loaded = true,
     path = "/home/patitomora/.local/share/nvim/site/pack/packer/start/nvim-treesitter",
@@ -108,10 +113,20 @@ _G.packer_plugins = {
     loaded = true,
     path = "/home/patitomora/.local/share/nvim/site/pack/packer/start/vim-be-good",
     url = "https://github.com/ThePrimeagen/vim-be-good"
+  },
+  vimtex = {
+    config = { "\27LJ\2\nk\0\0\2\0\6\0\t6\0\0\0009\0\1\0'\1\3\0=\1\2\0006\0\0\0009\0\1\0'\1\5\0=\1\4\0K\0\1\0\flatexmk\27vimtex_compiler_method\fzathura\23vimtex_view_method\6g\bvim\0" },
+    loaded = true,
+    path = "/home/patitomora/.local/share/nvim/site/pack/packer/start/vimtex",
+    url = "https://github.com/lervag/vimtex"
   }
 }
 
 time([[Defining packer_plugins]], false)
+-- Config for: vimtex
+time([[Config for vimtex]], true)
+try_loadstring("\27LJ\2\nk\0\0\2\0\6\0\t6\0\0\0009\0\1\0'\1\3\0=\1\2\0006\0\0\0009\0\1\0'\1\5\0=\1\4\0K\0\1\0\flatexmk\27vimtex_compiler_method\fzathura\23vimtex_view_method\6g\bvim\0", "config", "vimtex")
+time([[Config for vimtex]], false)
 
 _G._packer.inside_compile = false
 if _G._packer.needs_bufread == true then

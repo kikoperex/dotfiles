@@ -244,6 +244,14 @@ return require('packer').startup(function(use)
   }
   use {"ThePrimeagen/vim-be-good"}
   use {"szymonwilczek/vim-be-better"}
+  use {"neovim/nvim-lspconfig"}
 
+  use { 
+      "lervag/vimtex",
+      config = function()
+          vim.g.vimtex_view_method = 'zathura'
+          vim.g.vimtex_compiler_method = 'latexmk'
+      end
+  }
 end)
 
