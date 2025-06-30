@@ -9,3 +9,4 @@ WALLPAPER=$(find "$WALLPAPER_DIR" -type f ! -name "$(basename "$CURRENT_WALL")" 
 # Apply the selected wallpaper
 wal -i "$WALLPAPER" --cols16 --backend haishoku --saturate 0.5 -b 000000 -n
 hyprctl hyprpaper reload ,"$WALLPAPER"
+notify-send "Theme changed to: " $WALLPAPER
