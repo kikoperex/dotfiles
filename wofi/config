@@ -1,8 +1,8 @@
 # Archivo: ~/.config/wofi/config
 
 # Configuración básica
-width=800
-height=600
+width=40%
+height=50%
 location=top-center
 show=drun
 prompt=

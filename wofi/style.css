@@ -2,26 +2,26 @@
 /* Importar colores de pywal */
 @import url("/home/patitomora/.cache/wal/colors-waybar.css");
 
-/* Ventana principal con glassmorphism */
+/* Ventana principal */
 window {
     margin: 0px;
-    border: 2px solid @color6;
-    border-radius: 20px;
-    background-color: rgba(0, 0, 0, 0.6);
-    backdrop-filter: blur(20px);
-    -webkit-backdrop-filter: blur(20px);
-    font-family: "JetBrains Mono", "Fira Code", monospace;
-    font-size: 14px;
-    box-shadow: 
-        0 10px 30px rgba(0, 0, 0, 0.3),
-        0 0 0 1px rgba(255, 255, 255, 0.05) inset;
+    border: 2px solid @color6; /* Colored border for the window */
+    border-radius: 10px; /* Matching Waybar's main bar */
+    background-color: rgba(33, 15, 5, 0.8); /* Matching Waybar's main bar background */
+    backdrop-filter: blur(25px); /* Stronger blur for glass effect */
+    -webkit-backdrop-filter: blur(25px);
+    font-family: "JetBrainsMono Nerd Font", "JetBrains Mono", monospace; /* Matching Waybar */
+    font-size: 14px; /* Reverted to normal size */
+    box-shadow:
+        0 15px 40px rgba(0, 0, 0, 0.5), /* Deeper shadow */
+        0 0 0 1px rgba(255, 255, 255, 0.02) inset; /* Very subtle inner border */
     animation: fadeIn 0.3s cubic-bezier(0.4, 0.0, 0.2, 1);
 }
 
 @keyframes fadeIn {
     from {
         opacity: 0;
-        transform: scale(0.95) translateY(-10px);
+        transform: scale(0.97) translateY(-15px); /* More pronounced entry */
     }
     to {
         opacity: 1;
@@ -29,61 +29,50 @@ window {
     }
 }
 
-/* Campo de entrada con glassmorphism */
+/* Campo de entrada */
 #input {
-    margin: 10px;
-    border: 1px solid @color8;
-    border-radius: 12px;
+    margin: 15px;
+    border: 1px solid @color8; /* Colored border for input */
+    border-radius: 8px; /* Slightly smaller than window */
     color: @foreground;
-    background-color: rgba(0, 0, 0, 0.25);
+    background-color: fade(@color1, 80%); /* Using Pywal accent color with transparency */
     backdrop-filter: blur(10px);
     -webkit-backdrop-filter: blur(10px);
-    padding: 12px;
-    font-size: 16px;
+    padding: 8px 12px; /* Adjusted padding */
+    font-size: 16px; /* Slightly larger for input readability */
     transition: all 0.3s cubic-bezier(0.4, 0.0, 0.2, 1);
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.15);
 }
 
 #input:focus {
-    border-color: @color4;
+    border: 2px solid @color4; /* More prominent border on focus */
     outline: none;
-    background-color: @color0;
-    box-shadow: 
-        0 0 0 2px fade(@color4, 20%),
-        0 4px 16px rgba(0, 0, 0, 0.2);
-    transform: translateY(-1px);
+    background-color: fade(@color1, 90%); /* Brighter on focus */
+    box-shadow:
+        0 0 0 2px fade(@color4, 30%),
+        0 6px 20px rgba(0, 0, 0, 0.3);
+    transform: translateY(-2px); /* More lift on focus */
 }
 
-/* Lista de elementos */
-#inner-box {
-    margin: 5px;
+/* List containers */
+#inner-box, #outer-box, #scroll {
+    margin: 0px; /* Remove margins from containers */
     border: none;
     background-color: transparent;
 }
 
-#outer-box {
-    margin: 5px;
-    border: none;
-    background-color: transparent;
-}
-
-/* Scroll */
-#scroll {
-    margin: 0px;
-    border: none;
-    background-color: transparent;
-}
-
-/* Elementos de la lista con glassmorphism */
+/* Elementos de la lista (cards) */
 #entry {
-    padding: 8px 12px;
-    margin: 2px 8px;
-    border-radius: 10px;
+    padding: 8px 12px; /* Adjusted padding */
+    margin: 2px 10px; /* Margin to create card separation */
+    border-radius: 8px; /* Rounded corners for cards */
     color: @foreground;
-    background-color: transparent;
+    background-color: fade(@color1, 60%); /* Subtle background for cards */
     transition: all 0.3s cubic-bezier(0.4, 0.0, 0.2, 1);
     position: relative;
     overflow: hidden;
+    box-shadow: 0 1px 5px rgba(0, 0, 0, 0.05);
+    border-left: 3px solid transparent; /* Subtle transparent border by default */
 }
 
 #entry::before {
@@ -93,22 +82,23 @@ window {
     left: 0;
     right: 0;
     bottom: 0;
-    background: rgba(255, 255, 255, 0.02);
-    border-radius: 10px;
+    background: rgba(255, 255, 255, 0.05); /* Lighter overlay */
+    border-radius: 8px; /* Reverted */
     transition: all 0.3s cubic-bezier(0.4, 0.0, 0.2, 1);
     opacity: 0;
 }
 
 #entry:selected {
-    color: @background;
-    background-color: @color1;
-    backdrop-filter: blur(15px);
-    -webkit-backdrop-filter: blur(15px);
+    color: @background; /* Text color changes */
+    background-color: @color4; /* Primary color for selected */
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
     font-weight: bold;
-    transform: translateY(-1px);
-    box-shadow: 
-        0 4px 16px rgba(0, 0, 0, 0.15),
-        0 0 0 1px rgba(255, 255, 255, 0.1) inset;
+    transform: scale(1.01); /* Slight scale on select */
+    box-shadow:
+        0 5px 15px rgba(0, 0, 0, 0.2),
+        0 0 0 1px @color4 inset;
+    border-left: 3px solid @color14; /* Colored border on selected */
 }
 
 #entry:selected::before {
@@ -116,67 +106,54 @@ window {
 }
 
 #entry:hover:not(:selected) {
-    background-color: fade(@color8, 30%);
-    backdrop-filter: blur(10px);
-    -webkit-backdrop-filter: blur(10px);
-    transform: translateY(-1px);
-    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.1);
+    background-color: fade(@color1, 70%); /* Brighter on hover */
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    transform: translateY(-2px); /* Lift on hover */
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.15);
+    border-left: 3px solid @color12; /* Colored border on hover */
 }
 
 #entry:hover:not(:selected)::before {
-    opacity: 0.5;
+    opacity: 0.7;
 }
 
 /* Iconos */
 #entry image {
-    margin-right: 8px;
-    padding-right: 4px;
-    filter: drop-shadow(0 1px 2px rgba(0, 0, 0, 0.2));
+    margin-right: 12px;
+    padding-right: 6px;
+    filter: drop-shadow(0 1px 3px rgba(0, 0, 0, 0.1));
 }
 
 /* Texto de los elementos */
 #entry label {
     color: inherit;
-    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+    text-shadow: none;
 }
 
-/* Separadores para diferentes modos */
-#entry.drun {
-    border-left: 3px solid @color2;
-}
-
-#entry.run {
-    border-left: 3px solid @color3;
-}
-
-#entry.filebrowser {
-    border-left: 3px solid @color5;
-}
-
-/* Estilo para calculadora */
-#entry.calc {
-    border-left: 3px solid @color6;
-    font-family: monospace;
+/* Remove mode-specific borders for a cleaner look */
+#entry.drun, #entry.run, #entry.filebrowser, #entry.calc {
+    border-left: none;
 }
 
 /* Texto de placeholder */
 #input::placeholder {
     color: fade(@foreground, 50%);
-    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+    text-shadow: none;
 }
 
-/* Scrollbar styling for webkit browsers */
+/* Scrollbar styling */
 #scroll scrollbar {
     background: transparent;
-    width: 6px;
+    width: 8px;
 }
 
 #scroll scrollbar slider {
-    background: fade(@color8, 40%);
-    border-radius: 3px;
+    background: fade(@color8, 50%);
+    border-radius: 4px;
     transition: background 0.3s ease;
 }
 
 #scroll scrollbar slider:hover {
-    background: fade(@color8, 60%);
+    background: fade(@color8, 70%);
 }
