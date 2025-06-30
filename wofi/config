@@ -1,9 +1,9 @@
-# Archivo: ~/.config/wofi/config
+# Wofi Configuration - Modern & Colorful
 
-# Configuración básica
+# Basic Settings
 width=40%
 height=50%
-location=top-center
+location=center
 show=drun
 prompt=
 filter_rate=100
@@ -19,12 +19,12 @@ hide_scroll=true
 print_command=false
 layer=overlay
 columns=1
-normal_window=false
+normal_window=true
 term=alacritty
 matching=contains
 gtk_dark=true
 
-# Keybindings básicos
+# Keybindings
 key_up=Up
 key_down=Down
 key_forward=Tab
