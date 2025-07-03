@@ -63,6 +63,9 @@ vim.keymap.set('o', 'ñ', 'l', { desc = 'Move right' })
 vim.keymap.set("v", "K", ":m '>+1<CR>gv=gv")
 vim.keymap.set("v", "L", ":m '<-2<CR>gv=gv")
 
+-- Remap for replacing text without copying to the register
+vim.keymap.set("x", "<leader>p", [["_dP"]], { noremap = true })
+
 -- Enhanced pywal configuration that works perfectly with Treesitter
 -- Source the pywal colors
 vim.cmd('source ~/.cache/wal/colors-wal.vim')
