@@ -40,7 +40,7 @@ pkill hyprpaper
 hyprpaper &
 
 # Generate new pywal theme
-wal -i "$wallpaper_path" --backend haishoku --cols16 --saturate 0.6 -b 000000 
+wal -i "$wallpaper_path" --cols16 --backend colorthief --saturate 0.4 -b 000000 -n
 
 # Restart services that use pywal colors (optional - uncomment what you use)
 # pkill waybar && waybar &
