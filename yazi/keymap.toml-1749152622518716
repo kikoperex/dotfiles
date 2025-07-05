@@ -1,7 +1,0 @@
-[manager]
-keymap = [
-    { on = [ "ñ" ], run = "arrow -1" },
-    { on = [ "k" ], run = "arrow 1" },
-    { on = [ "l" ], run = "arrow -1" },
-    { on = [ "j" ], run = "arrow 1" },
-]

@@ -1,0 +1,7 @@
+[manager]
+keymap = [
+    { on = [ "j" ], run = "arrow -1" },
+    { on = [ "k" ], run = "arrow 1" },
+    { on = [ "l" ], run = "enter" },
+    { on = [ "ñ" ], run = "leave" },
+]
