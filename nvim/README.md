@@ -58,7 +58,8 @@ Before you begin, ensure you have the following installed on your system:
 *   **Git**: Used for cloning this repository and managing plugins.
 *   **`unzip`**: Required by Packer for some plugin installations.
 *   **A C compiler (like GCC) and Make**: Required for Treesitter to compile parsers.
-*   **Node.js and npm (or yarn)**: Some Neovim plugins (especially those related to LSP or frontend development) might require Node.js.
+*   **Node.js and npm (or yarn)**: Required for some language servers (e.g., `tsserver` for TypeScript) and autocompletion plugins.
+*   **Python 3 and `pip`**: Required for some language servers (e.g., `pyright` for Python).
 
 ## 4. Installation Guide
 

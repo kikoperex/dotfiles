@@ -19,8 +19,8 @@ hide_scroll=true
 print_command=false
 layer=overlay
 columns=1
-normal_window=true
-term=alacritty
+normal_window=false
+term=kitty
 matching=contains
 gtk_dark=true
 
