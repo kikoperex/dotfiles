@@ -61,9 +61,9 @@
     },
     
     "network": {
-        "format-wifi": "{essid} ",
-        "format-ethernet": "{ipaddr}/{cidr} ",
-        "tooltip-format": "{ifname} via {gwaddr} ",
+        "format-wifi": "{essid} ({signalStrength}%) ↑ {bandwidthUpBytes} ↓ {bandwidthDownBytes}",
+        "format-ethernet": "{ipaddr}/{cidr} ↑ {bandwidthUpBytes} ↓ {bandwidthDownBytes}",
+        "tooltip-format": "{ifname} via {gwaddr} \nUp: {bandwidthUpBytes} Down: {bandwidthDownBytes}",
         "format-linked": "{ifname} (No IP) ",
         "format-disconnected": "Disconnected ⚠",
         "format-alt": "{ifname}: {ipaddr}/{cidr}"
