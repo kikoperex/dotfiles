@@ -26,8 +26,8 @@
     "clock": {
         "timezone": "America/Mexico_City",
         "tooltip-format": "<big>{:%Y %B}</big>\n<tt><small>{calendar}</small></tt>",
-        "format-alt": "{:%Y-%m-%d}",
-        "format": "{:%I:%M %p}"
+        "format-alt": "{:%A}",
+        "format": "{:%d - %I:%M}"
     },
     
     "cpu": {
