@@ -32,6 +32,7 @@ return require('packer').startup(function(use)
   use {"ThePrimeagen/vim-be-good"}
   use {"szymonwilczek/vim-be-better"}
   use {"neovim/nvim-lspconfig"}
+  use {"RedsXDD/neopywal.nvim", as = "neopywal"}
 
   use { 
       "lervag/vimtex",
