@@ -10,3 +10,4 @@ WALLPAPER=$(find "$WALLPAPER_DIR" -type f ! -name "$(basename "$CURRENT_WALL")" 
 hyprctl hyprpaper reload ,"$WALLPAPER"
 wal -i "$WALLPAPER" --cols16 --backend colorthief --saturate 0.4 -b 000000 -n
 notify-send "Theme changed to: " $WALLPAPER
+pkill -f swaync && swaync

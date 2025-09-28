@@ -1,0 +1,176 @@
+/*
+ * SwayNC - Glassy Minimalist + Pywal
+ * Basado en la estructura del CSS por defecto
+ */
+@import "/home/patitomora/.cache/wal/colors-waybar.css";
+
+/* Variables raíz - reemplazando las por defecto con pywal */
+:root {
+  --cc-bg: alpha(@color1, 0.55);
+  --noti-border-color: alpha(@color7, 0.4);
+  --noti-bg: @color4;
+  --noti-bg-alpha: 0.3;
+  --noti-bg-darker: @color0;
+  --noti-bg-hover: alpha(@color2, 0.25);
+  --noti-bg-focus: alpha(@color2, 0.15);
+  --noti-close-bg: alpha(@color1, 0.4);
+  --noti-close-bg-hover: alpha(@color1, 0.7);
+  --text-color: @foreground;
+  --text-color-disabled: alpha(@foreground, 0.6);
+  --bg-selected: alpha(@color5, 0.75);
+  --notification-icon-size: 64px;
+  --notification-app-icon-size: calc(var(--notification-icon-size) / 3);
+  --notification-group-icon-size: 32px;
+  --border: 1px solid alpha(@color7, 0.3);
+  --border-radius: 8px;
+  --notification-shadow: none;
+  --font-size-body: 12px;
+  --font-size-summary: 14px;
+  --hover-transition: background-color 0.15s ease-out;
+  --group-collapse-transition: opacity 400ms ease-in-out;
+}
+
+/* Fuente personalizada */
+* {
+    font-family: "JetBrainsMono Nerd Font", monospace;
+    font-size: 13px;
+}
+
+/* Asegurar transparencia de fondos */
+notificationwindow, 
+blankwindow, 
+.blank-window {
+  background: transparent;
+}
+
+.floating-notifications {
+  background: transparent;
+}
+
+/* Control center con estética glassy */
+.control-center {
+  background: var(--cc-bg);
+  color: var(--text-color);
+  border-radius: 10px;
+  border: var(--border);
+}
+
+/* Notificaciones individuales */
+.notification-row .notification-background .notification {
+  border-radius: var(--border-radius);
+  border: var(--border);
+  padding: 0;
+  transition: var(--hover-transition);
+  background: rgba(var(--noti-bg), var(--noti-bg-alpha));
+}
+
+/* Hover en notificaciones */
+.notification-row .notification-background .notification .notification-default-action:hover {
+  background: var(--noti-bg-hover);
+}
+
+/* Botones de acción con estética pill */
+.notification-row .notification-background .notification .notification-action > button {
+  border-radius: 6px;
+  color: @color0;
+  background: var(--bg-selected);
+  border: none;
+  padding: 4px 8px;
+  margin: 2px;
+  font-weight: bold;
+  transition: var(--hover-transition);
+}
+
+.notification-row .notification-background .notification .notification-action > button:hover {
+  background: alpha(@color5, 0.9);
+}
+
+/* Íconos con fondo translúcido */
+.notification-row .notification-background .notification .notification-default-action .notification-content .image,
+.notification-row .notification-background .notification .notification-default-action .notification-content .app-icon {
+  border-radius: 5px;
+  padding: 2px;
+  background-color: rgba(var(--noti-bg), var(--noti-bg-alpha));
+}
+
+/* Texto de notificaciones */
+.notification-row .notification-background .notification .notification-default-action .notification-content .text-box .summary {
+  font-size: var(--font-size-summary);
+  font-weight: bold;
+  color: var(--text-color);
+}
+
+.notification-row .notification-background .notification .notification-default-action .notification-content .text-box .body {
+  font-size: var(--font-size-body);
+  color: alpha(@foreground, 0.9);
+}
+
+.notification-row .notification-background .notification .notification-default-action .notification-content .text-box .time {
+  font-size: 11px;
+  color: alpha(@color6, 0.8);
+}
+
+/* Botón de cerrar */
+.close-button {
+  background: var(--noti-close-bg);
+  color: var(--text-color);
+}
+
+.close-button:hover {
+  background: var(--noti-close-bg-hover);
+  transition: var(--hover-transition);
+}
+
+/* Widgets */
+.widget {
+  margin: 8px;
+  padding: 8px;
+  border-radius: var(--border-radius);
+  background: rgba(var(--noti-bg), var(--noti-bg-alpha));
+  color: var(--text-color);
+}
+
+.widget:hover {
+  background: var(--noti-bg-hover);
+}
+
+/* Widget título */
+.widget-title > button {
+  border-radius: 6px;
+  background: var(--bg-selected);
+  color: @color0;
+  border: none;
+  padding: 4px 8px;
+  font-weight: bold;
+}
+
+.widget-title > button:hover {
+  background: alpha(@color5, 0.9);
+}
+
+/* Widget DND */
+.widget-dnd switch {
+  border-radius: 6px;
+  background: alpha(@color6, 0.3);
+}
+
+.widget-dnd switch slider {
+  border-radius: 6px;
+  background: var(--bg-selected);
+}
+
+/* Scrollbars */
+scrollbar {
+  background-color: transparent;
+  border-radius: 6px;
+}
+
+scrollbar slider {
+  background-color: alpha(@color6, 0.4);
+  border-radius: 6px;
+  margin: 2px;
+}
+
+scrollbar slider:hover {
+  background-color: alpha(@color6, 0.6);
+}

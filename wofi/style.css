@@ -1,156 +1,83 @@
-/* Wofi Style - Modern, Smooth, Colorful, Transparent */
+/*
+ * Wofi - Glassy Minimalist + Pywal
+ * Fondo translúcido con presencia fuerte de la paleta pywal
+ */
 
-/* Import pywal colors from Waybar's cache */
-@import url("/home/patitomora/.cache/wal/colors-waybar.css");
+@import "/home/patitomora/.cache/wal/colors-waybar.css";
 
-/* Main Window */
+* {
+    font-family: "JetBrainsMono Nerd Font", monospace;
+    font-size: 13px;
+}
+
+/* Ventana principal */
 window {
-    margin: 0px;
-    border: 2px solid @color6; /* Colorful border for the window */
-    border-radius: 12px; /* Slightly more rounded than Waybar for a softer look */
-    background-color: rgba(33, 15, 5, 0.8); /* Matching Waybar's main bar background with transparency */
-    backdrop-filter: blur(20px); /* Strong blur for glass effect */
-    -webkit-backdrop-filter: blur(20px);
-    font-family: "JetBrainsMono Nerd Font", "JetBrains Mono", monospace; /* Matching Waybar's font */
-    font-size: 14px;
-    box-shadow:
-        0 15px 40px rgba(0, 0, 0, 0.6), /* Deeper, more prominent shadow */
-        0 0 0 1px rgba(255, 255, 255, 0.03) inset; /* Subtle inner border */
-    animation: fadeIn 0.3s cubic-bezier(0.4, 0.0, 0.2, 1); /* Smooth entry animation */
+    background-color: alpha(@color1, 0.55);  /* Fondo principal con mayor transparencia */
+    border: 1px solid alpha(@color7, 0.4);
+    border-radius: 10px;
+    padding: 8px;
 }
 
-/* Fade-in animation for the window */
-@keyframes fadeIn {
-    from {
-        opacity: 0;
-        transform: scale(0.95) translateY(-20px); /* More pronounced entry effect */
-    }
-    to {
-        opacity: 1;
-        transform: scale(1) translateY(0);
-    }
+/* Caja externa */
+#outer-box {
+    padding: 6px;
 }
 
-/* Input Field */
+/* Barra de búsqueda */
 #input {
-    margin: 15px;
-    border: 1px solid @color8; /* Colorful border for input */
-    border-radius: 10px; /* Rounded corners for input */
     color: @foreground;
-    background-color: fade(@color1, 85%); /* Using Pywal accent color with transparency */
-    backdrop-filter: blur(10px);
-    -webkit-backdrop-filter: blur(10px);
-    padding: 10px 15px; /* Generous padding */
-    font-size: 16px; /* Slightly larger for readability */
-    transition: all 0.3s cubic-bezier(0.4, 0.0, 0.2, 1); /* Smooth transitions */
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+    background-color: alpha(@color4, 0.3);   /* Más translúcido */
+    border: none;
+    border-radius: 8px;
+    padding: 7px 11px;
+    margin-bottom: 6px;
 }
 
 #input:focus {
-    border: 2px solid @color4; /* More prominent border on focus */
-    outline: none;
-    background-color: fade(@color1, 95%); /* Brighter on focus */
-    box-shadow:
-        0 0 0 2px fade(@color4, 40%),
-        0 8px 25px rgba(0, 0, 0, 0.4);
-    transform: translateY(-3px); /* More lift on focus */
+    background-color: alpha(@color4, 0.45);
 }
 
-/* List Containers */
-#inner-box, #outer-box, #scroll {
-    margin: 0px;
-    border: none;
-    background-color: transparent;
+/* Lista de resultados */
+#scroll {
+    margin: 0;
+    padding: 2px;
 }
 
-/* List Entries (Cards) */
+/* Entradas */
 #entry {
-    padding: 10px 15px; /* Adjusted padding */
-    margin: 4px 15px; /* Margin to create card separation */
-    border-radius: 10px; /* Rounded corners for cards */
+    padding: 6px 8px;
+    margin: 2px 0;
+    border-radius: 6px;
     color: @foreground;
-    background-color: fade(@color0, 70%); /* Subtle background for cards, using base color */
-    transition: all 0.3s cubic-bezier(0.4, 0.0, 0.2, 1); /* Smooth transitions */
-    position: relative;
-    overflow: hidden;
-    box-shadow: 0 1px 8px rgba(0, 0, 0, 0.1);
-    border-left: 4px solid transparent; /* Subtle transparent border by default */
+    background-color: transparent;
+    transition: background-color 0.15s ease-out;
 }
 
-#entry::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background: rgba(255, 255, 255, 0.07); /* Lighter overlay */
-    border-radius: 10px;
-    transition: all 0.3s cubic-bezier(0.4, 0.0, 0.2, 1);
-    opacity: 0;
+/* Hover translúcido */
+#entry:hover {
+    background-color: alpha(@color2, 0.25);
 }
 
+/* Selección destacada, efecto “pill” */
 #entry:selected {
-    color: @background; /* Text color changes */
-    background-color: @color4; /* Primary color for selected */
-    backdrop-filter: blur(12px);
-    -webkit-backdrop-filter: blur(12px);
+    background-color: alpha(@color5, 0.75);
+    color: @color0;
     font-weight: bold;
-    transform: scale(1.02); /* Slight scale on select */
-    box-shadow:
-        0 6px 20px rgba(0, 0, 0, 0.3),
-        0 0 0 1px @color4 inset;
-    border-left: 4px solid @color14; /* Strong colorful border on selected */
+    border-radius: 8px;
 }
 
-#entry:selected::before {
-    opacity: 1;
-}
-
-#entry:hover:not(:selected) {
-    background-color: fade(@color0, 80%); /* Brighter on hover */
-    backdrop-filter: blur(10px);
-    -webkit-backdrop-filter: blur(10px);
-    transform: translateY(-3px); /* Lift on hover */
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
-    border-left: 4px solid @color12; /* Colorful border on hover */
-}
-
-#entry:hover:not(:selected)::before {
-    opacity: 0.8;
-}
-
-/* Icons */
+/* Iconos */
 #entry image {
-    margin-right: 15px;
-    padding-right: 8px;
-    filter: drop-shadow(0 2px 5px rgba(0, 0, 0, 0.2));
-}
-
-/* Entry Text */
-#entry label {
-    color: inherit;
-    text-shadow: none;
-}
-
-/* Placeholder Text */
-#input::placeholder {
-    color: fade(@foreground, 60%);
-    text-shadow: none;
-}
-
-/* Scrollbar Styling */
-#scroll scrollbar {
-    background: transparent;
-    width: 10px; /* Slightly wider scrollbar */
-}
-
-#scroll scrollbar slider {
-    background: fade(@color8, 60%); /* Colorful scrollbar */
+    margin-right: 8px;
     border-radius: 5px;
-    transition: background 0.3s ease;
+    padding: 2px;
+    background-color: alpha(@color4, 0.3);
 }
 
-#scroll scrollbar slider:hover {
-    background: fade(@color8, 80%);
+/* Separadores ligeros */
+.separator {
+    height: 1px;
+    margin: 3px 0;
+    background-color: alpha(@color6, 0.25);
 }
+

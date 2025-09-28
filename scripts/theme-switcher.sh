@@ -46,5 +46,8 @@ wal -i "$wallpaper_path" --cols16 --backend colorthief --saturate 0.4 -b 000000 
 # pkill waybar && waybar &
 # pkill dunst && dunst &
 
+# Reinicia el centro de nofiticaciones para que se cargen los nuevos colores
+pkill -f swaync && swaync
+
 # Send notification
 notify-send "Theme Switcher" "Theme changed to: $selected_wallpaper"
