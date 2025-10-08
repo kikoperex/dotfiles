@@ -1,5 +1,6 @@
 # Dotfiles
 Este repositorio almacena y comparte mis configuraciones manuales de mi sistema Arch Linux, con varios componentes
+### OS: Arch Linux | WM: Hyprland | Editor: Neovim | Terminal: Kitty | Shell: bash
 
 # Enfoque
 Me gusta la personalización, rapidez, eficiencia, y un sistema cohesivo, mi configuración está fuertemente enfocada
@@ -10,11 +11,12 @@ al que yo me adapte, esto para que el flujo de trabajo se vuelva autómatico y n
 intentando resolver, y mi mente, fuertemente enfocado en evitar la fátiga visual, no me gusta hacer Alt + tab y buscar que
 ventana quiero ir, eso genera fátiga mental y visual, no me gusta tener varias ventanas flotantes unas solapadas con otras
 con los entornos de trabajo, cada aplicación me queda a un solo golpe de teclado, que ya tengo automatizado con mi memoria 
-muscular. Un entorno sencillo, rápido, eficiente, y sin distracciones.
+muscular. Un entorno sencillo, rápido, eficiente, y sin distracciones. Evité utilizar configuraciones ajenas, ya que prefiero 
+entender a profundidad como está construido mi propio entorno, y haciéndolo yo mismo se convierte más fácil de mantener y modificar.
 
 
 ## Hyprland
-Elegí este gestos de ventanas en mozaico por que es rápido, fácilmente customizable, y sobre todo, muy bonito.
+Elegí este gestor de ventanas en mozaico por que es rápido, fácilmente customizable, y sobre todo, muy bonito.
 
 ## neovim
 Es el santo grial de esta configuración, todos los otros componetes están pensados para complementar a este editor de texto.
