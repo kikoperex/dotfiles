@@ -1,6 +1,7 @@
 # Dotfiles
 Este repositorio almacena y comparte mis configuraciones manuales de mi sistema Arch Linux, con varios componentes
 ### OS: Arch Linux | WM: Hyprland | Editor: Neovim | Terminal: Kitty | Shell: bash
+![Mi entorno Hyprland](assets/screenshot-20250927-215656.png)
 
 # Enfoque
 Me gusta la personalización, rapidez, eficiencia, y un sistema cohesivo, mi configuración está fuertemente enfocada
