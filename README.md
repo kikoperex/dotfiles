@@ -16,7 +16,7 @@ entender a profundidad como está construido mi propio entorno, y haciéndolo yo
 
 
 ## Hyprland
-Elegí este gestor de ventanas en mozaico por que es rápido, fácilmente customizable, y sobre todo, muy bonito.
+Elegí este gestor de ventanas en mosaico por que es rápido, fácilmente customizable, y sobre todo, muy bonito.
 
 ## neovim
 Es el santo grial de esta configuración, todos los otros componetes están pensados para complementar a este editor de texto.
@@ -33,7 +33,7 @@ Enfocado en no ser vistoso, elegí una altura de 12 píxeles de manera deliberad
 Lo utilizo como mi visor de archivos, se acopla ya que tiene atajos de teclado de vim, es conveniente ya que permite ver el directorio actual, lo que hay en el anterior, y lo que hay en el siguiente, me parece más práctico que visores gráficos como Dolphin, este último lo tengo instalado únicamente por sí acaso.
 
 ## zathura
-Visor de PDFs, ligero, simple, minimalista y que también contiene un flujo basado en vim, y se integra bastante bien con la estéticade las herramientas de terminal.
+Visor de PDFs, ligero, simple, minimalista y que también contiene un flujo basado en vim, y se integra bastante bien con la estética de las herramientas de terminal.
 
 ## swaync
 Mi demonio de notificaciones sencillo, personalizable, y con un centro de control de notificaciones.
