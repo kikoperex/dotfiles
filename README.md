@@ -16,7 +16,7 @@ muscular. Un entorno sencillo, rápido, eficiente, y sin distracciones. Evité u
 entender a profundidad como está construido mi propio entorno, y haciéndolo yo mismo se convierte más fácil de mantener y modificar.
 
 
-## Hyprland
+## hyprland
 Elegí este gestor de ventanas en mosaico por que es rápido, fácilmente customizable, y sobre todo, muy bonito.
 
 ## neovim
@@ -38,6 +38,9 @@ Visor de PDFs, ligero, simple, minimalista y que también contiene un flujo basa
 
 ## swaync
 Mi demonio de notificaciones sencillo, personalizable, y con un centro de control de notificaciones.
+
+# tmux
+Multiplexor de terminales flexible y personalizable, permitiendome hacer sesiones de terminal persistentes.
 
 ## pywal16
 Lo utilizo para generar colores acordes al fondo de pantalla, así no solo tengo un entorno eficiente, sino también bonito y placentero de usar.
