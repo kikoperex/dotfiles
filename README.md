@@ -9,7 +9,7 @@ a un flujo de trabajo centrado en el teclado, que se siente como un solo gran en
 mente que no solo se hace por rápidez y eficiencia, sino para evitar la fátiga mental a la hora de trabajar
 he intentado que los atajos de teclado sean universales a lo largo de mi entorno, y que haya un flujo claro y repetitivo
 al que yo me adapte, esto para que el flujo de trabajo se vuelva autómatico y no se interponga entre el problema que estoy
-intentando resolver, y mi mente, fuertemente enfocado en evitar la fátiga visual, no me gusta hacer Alt + tab y buscar que
+intentando resolver, y mi mente, fuertemente enfocado en evitar la fátiga visual, no me gusta hacer Alt + tab y buscar visualmente a que
 ventana quiero ir, eso genera fátiga mental y visual, no me gusta tener varias ventanas flotantes unas solapadas con otras
 con los entornos de trabajo, cada aplicación me queda a un solo golpe de teclado, que ya tengo automatizado con mi memoria 
 muscular. Un entorno sencillo, rápido, eficiente, y sin distracciones. Evité utilizar configuraciones ajenas, ya que prefiero 
