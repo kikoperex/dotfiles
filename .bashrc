@@ -75,20 +75,16 @@ else
     # Prompt sin colores
     PS1='\u@\h:\w\$ '
 fi
-
 # --- Inicio: Autostart de tmux ---
 # Solo si estamos en una terminal interactiva y no ya dentro de tmux
 if [[ $- == *i* ]] && [ -z "$TMUX" ]; then
     SESSION_NAME="main"
 
-    # Si no existe la sesión, créala con una estructura inicial
-    if ! tmux has-session -t "$SESSION_NAME" 2>/dev/null; then
-        tmux new-session -d -s "$SESSION_NAME" -n "1:main"
-        tmux select-window -t "$SESSION_NAME:1"
+    # Si no existe ninguna sesión de tmux activa (en todo el sistema)
+    if ! pgrep -x tmux >/dev/null 2>&1; then
+        # Crea una nueva sesión y conéctate a ella
+        tmux new-session -s "$SESSION_NAME"
     fi
-
-    # Conéctate a la sesión
-    tmux attach -t "$SESSION_NAME"
+    # Si ya existe tmux corriendo, simplemente abre bash normal
 fi
 # --- Fin: Autostart de tmux ---
-
