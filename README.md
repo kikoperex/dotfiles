@@ -39,7 +39,7 @@ Visor de PDFs, ligero, simple, minimalista y que también contiene un flujo basa
 ## swaync
 Mi demonio de notificaciones sencillo, personalizable, y con un centro de control de notificaciones.
 
-# tmux
+## tmux
 Multiplexor de terminales flexible y personalizable, permitiendome hacer sesiones de terminal persistentes.
 
 ## pywal16
