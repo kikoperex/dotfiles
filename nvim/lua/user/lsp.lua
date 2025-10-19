@@ -10,6 +10,17 @@ if not mason_lspconfig_ok then
 end
 
 -- Inicializar lspconfig para que agregue sus configs al runtimepath
+-- Capabilities con soporte para nvim-cmp
+local cmp_nvim_lsp_ok, cmp_nvim_lsp = pcall(require, "cmp_nvim_lsp")
+local capabilities = vim.lsp.protocol.make_client_capabilities()
+if cmp_nvim_lsp_ok then
+  capabilities = cmp_nvim_lsp.default_capabilities(capabilities)
+end
+
+-- Configuración global para todos los LSP con capabilities
+vim.lsp.config('*', {
+  capabilities = capabilities,
+})
 -- pero NO lo usaremos para setup()
 require('lspconfig')
 
@@ -95,9 +106,18 @@ vim.diagnostic.config({
   severity_sort = true,
 })
 
--- Símbolos de diagnóstico
-local signs = { Error = "✘", Warn = "▲", Hint = "⚑", Info = "»" }
-for type, icon in pairs(signs) do
-  local hl = "DiagnosticSign" .. type
-  vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = hl })
-end
+-- Símbolos de diagnóstico (nueva API)
+vim.diagnostic.config({
+  virtual_text = true,
+  signs = {
+    text = {
+      [vim.diagnostic.severity.ERROR] = "✘",
+      [vim.diagnostic.severity.WARN] = "▲",
+      [vim.diagnostic.severity.HINT] = "⚑",
+      [vim.diagnostic.severity.INFO] = "»",
+    }
+  },
+  underline = true,
+  update_in_insert = false,
+  severity_sort = true,
+})

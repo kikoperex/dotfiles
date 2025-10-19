@@ -36,10 +36,18 @@ return require('packer').startup(function(use)
   use {"neovim/nvim-lspconfig"}
   use {"williamboman/mason.nvim"}
   use {"williamboman/mason-lspconfig.nvim"}
-  
+
+	  -- Autocompletado
+  use 'hrsh7th/nvim-cmp'           -- Motor de autocompletado
+  use 'hrsh7th/cmp-nvim-lsp'       -- Fuente LSP para nvim-cmp
+  use 'hrsh7th/cmp-buffer'         -- Fuente de palabras del buffer
+  use 'hrsh7th/cmp-path'           -- Fuente de rutas de archivos
+  use 'L3MON4D3/LuaSnip'           -- Motor de snippets
+  use 'saadparwaiz1/cmp_luasnip'   -- Integración snippets con cmp
+
   use {"RedsXDD/neopywal.nvim", as = "neopywal"}
-  
-  use { 
+
+  use {
     "lervag/vimtex",
     config = function()
       vim.g.vimtex_view_method = 'zathura'
