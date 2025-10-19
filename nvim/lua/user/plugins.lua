@@ -14,34 +14,39 @@ local packer_bootstrap = ensure_packer()
 return require('packer').startup(function(use)
   -- Packer can manage itself
   use 'wbthomason/packer.nvim'
-
+  
   use {
-	  'nvim-telescope/telescope.nvim', tag = '0.1.8',
-	  requires = { {'nvim-lua/plenary.nvim'} }
+    'nvim-telescope/telescope.nvim', tag = '0.1.8',
+    requires = { {'nvim-lua/plenary.nvim'} }
   }
-
+  
   use {
-	  'nvim-treesitter/nvim-treesitter',
-	  run = function()
-		  local ts_update = require('nvim-treesitter.install').update({ with_sync = true })
-		  ts_update()
-	  end,
-    -- Ensure nvim-treesitter-textobjects is loaded after nvim-treesitter
-    'nvim-treesitter/nvim-treesitter-textobjects'
+    'nvim-treesitter/nvim-treesitter',
+    run = function()
+      local ts_update = require('nvim-treesitter.install').update({ with_sync = true })
+      ts_update()
+    end,
   }
+  use 'nvim-treesitter/nvim-treesitter-textobjects'
+  
   use {"ThePrimeagen/vim-be-good"}
   use {"szymonwilczek/vim-be-better"}
+  
+  -- LSP
   use {"neovim/nvim-lspconfig"}
+  use {"williamboman/mason.nvim"}
+  use {"williamboman/mason-lspconfig.nvim"}
+  
   use {"RedsXDD/neopywal.nvim", as = "neopywal"}
-
+  
   use { 
-      "lervag/vimtex",
-      config = function()
-          vim.g.vimtex_view_method = 'zathura'
-          vim.g.vimtex_compiler_method = 'latexmk'
-      end
+    "lervag/vimtex",
+    config = function()
+      vim.g.vimtex_view_method = 'zathura'
+      vim.g.vimtex_compiler_method = 'latexmk'
+    end
   }
-
+  
   if packer_bootstrap then
     require('packer').sync()
   end
