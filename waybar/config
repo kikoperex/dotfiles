@@ -61,7 +61,7 @@
     },
     
     "network": {
-        "format-wifi": "{essid} ({signalStrength}%) ↑ {bandwidthUpBytes} ↓ {bandwidthDownBytes}",
+        "format-wifi": "{essid}",
         "format-ethernet": "{ipaddr}/{cidr} ↑ {bandwidthUpBytes} ↓ {bandwidthDownBytes}",
         "tooltip-format": "{ifname} via {gwaddr} \nUp: {bandwidthUpBytes} Down: {bandwidthDownBytes}",
         "format-linked": "{ifname} (No IP) ",
