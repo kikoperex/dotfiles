@@ -28,7 +28,7 @@ Una terminal rápida, fácil de customizar y con una documentación variada, la 
 es mi opción predilecta.
 
 ## waybar
-Enfocado en no ser vistoso, elegí una altura de 12 píxeles de manera deliberada para que ocupara el menor espacio en pantalla posible, contiene información básica y útil para el día a día, evito que muestre información innecesaria que rara vez consulto.
+Enfocado en no ser vistoso, elegí una altura de 14 píxeles de manera deliberada para que ocupara el menor espacio en pantalla posible, contiene información básica y útil para el día a día, evito que muestre información innecesaria que rara vez consulto.
 
 ## yazi
 Lo utilizo como mi visor de archivos, se acopla ya que tiene atajos de teclado de vim, es conveniente ya que permite ver el directorio actual, lo que hay en el anterior, y lo que hay en el siguiente, me parece más práctico que visores gráficos como Dolphin, este último lo tengo instalado únicamente por sí acaso.
