@@ -1,0 +1,142 @@
+/* ═══════════════════════════════════════════════════════════════
+ *  ALTERNATIVA 4 — "Chips semánticos"
+ *  Esquinas de 4px (casi rectas, aire técnico), sin bordes, y cada
+ *  módulo toma un color de tu paleta de señales. El color es la
+ *  identidad, no la forma.
+ *
+ *  ⚠ RECOMENDADO en ~/.config/waybar/config:
+ *      "height": 22,
+ *      "spacing": 5
+ * ═══════════════════════════════════════════════════════════════ */
+
+@import "/home/kikoperex/.config/theme/colors.css";
+
+* {
+    border: none;
+    border-radius: 0;
+    font-family: "JetBrainsMono Nerd Font Mono", "Noto Color Emoji", "JetBrains Mono", monospace;
+    font-size: 10px;
+    min-height: 0;
+}
+
+window#waybar {
+    background-color: alpha(@background, 0.9);
+    border-top: 1px solid alpha(@border, 0.5);
+    color: @text;
+}
+
+window#waybar.hidden { opacity: 0.2; }
+
+/* ── Chip base ──────────────────────────────────────────────── */
+#clock,
+#battery,
+#pulseaudio,
+#network,
+#cpu,
+#memory,
+#temperature,
+#custom-recording {
+    background-color: alpha(@raised, 0.75);
+    border: none;
+    border-radius: 4px;
+    padding: 0 8px;
+    margin: 3px 0;
+    color: @text;
+    font-feature-settings: "tnum";
+    transition: background-color .2s ease, color .2s ease;
+}
+
+/* ── Un tono por función ────────────────────────────────────── */
+#cpu         { color: @sage_hi; }
+#memory      { color: @slate_hi; }
+#temperature { color: @brass_hi; }
+#pulseaudio  { color: @violet_hi; }
+#network     { color: @patina_hi; }
+#battery     { color: @sage_hi; }
+#clock       { color: @white; font-weight: 600; letter-spacing: .04em; }
+#custom-recording { color: alpha(@muted, 0.6); }
+
+#cpu:hover,
+#memory:hover,
+#temperature:hover,
+#pulseaudio:hover,
+#network:hover,
+#battery:hover {
+    background-color: @raised;
+    color: @white;
+}
+
+/* ── Workspaces: el activo es un chip lleno y corto ─────────── */
+#workspaces {
+    margin-left: 5px;
+    padding: 0;
+    background: transparent;
+}
+
+#workspaces button {
+    padding: 0 5px;
+    margin: 3px 1px;
+    background: transparent;
+    border-radius: 3px;
+    color: alpha(@muted, 0.5);
+    transition: all .2s ease;
+}
+
+#workspaces button:hover {
+    background: alpha(@accent, 0.08);
+    color: @text;
+}
+
+#workspaces button.active {
+    background: @accent;
+    color: @void;
+    font-weight: 700;
+}
+
+#workspaces button.urgent {
+    background: @red;
+    color: @void;
+}
+
+/* ── Estados = el chip cambia de color, no de forma ─────────── */
+#battery.charging,
+#battery.plugged {
+    background-color: alpha(@sage, 0.2);
+    color: @sage_hi;
+}
+
+#battery.warning:not(.charging) {
+    background-color: alpha(@brass, 0.18);
+    color: @brass_hi;
+}
+
+#battery.critical:not(.charging),
+#temperature.critical,
+#custom-recording.recording {
+    background-color: @red;
+    color: @void;
+    animation-name: chip-blink;
+    animation-duration: 0.7s;
+    animation-timing-function: linear;
+    animation-iteration-count: infinite;
+    animation-direction: alternate;
+}
+
+#network.disconnected {
+    background-color: alpha(@red, 0.22);
+    color: @red_hi;
+}
+
+#pulseaudio.muted {
+    background-color: alpha(@surface, 0.7);
+    color: alpha(@muted, 0.45);
+}
+
+#custom-recording.not-recording {
+    background: transparent;
+    color: alpha(@muted, 0.3);
+}
+
+@keyframes chip-blink {
+    to { background-color: @brass; color: @void; }
+}

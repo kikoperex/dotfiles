@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<title>waybar · comparativa de temas</title>
+<style>
+  :root{
+    --bg:#121616; --surface:#191e1e; --raised:#212729; --border:#333c41;
+    --muted:#838d95; --text:#c7cace; --white:#e6e8e9; --accent:#d8e6ea;
+    --red:#c2665f; --red-hi:#d17a72; --sage:#86a38c; --sage-hi:#9fbca5;
+    --brass:#bfa877; --slate:#7c97ab; --patina:#82a6a1; --violet:#9e8ba8;
+    --sage-less:0; --brass-hi:#d8c29b; --slate-hi:#9bb6c9; --patina-hi:#a2c4bf; --violet-hi:#bcaac5;
+    --void:#0b0e0d;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{
+    background:#080a0a; color:var(--text);
+    font-family:"JetBrains Mono","JetBrainsMono Nerd Font Mono",ui-monospace,monospace;
+    padding:40px 28px 80px; -webkit-font-smoothing:antialiased;
+  }
+  h1{font-size:15px;font-weight:600;color:var(--white);letter-spacing:.16em;text-transform:uppercase}
+  .sub{font-size:11px;color:var(--muted);margin:10px 0 34px;line-height:1.7;max-width:70ch}
+  .sub code{color:var(--accent);background:rgba(216,230,234,.07);padding:1px 5px;border-radius:3px}
+
+  .case{margin-bottom:44px}
+  .case header{display:flex;align-items:baseline;gap:14px;margin-bottom:10px;flex-wrap:wrap}
+  .case h2{font-size:11px;font-weight:600;color:var(--white);letter-spacing:.1em;text-transform:uppercase}
+  .case .meta{font-size:10px;color:var(--muted);letter-spacing:.04em}
+  .case .meta b{color:var(--accent);font-weight:500}
+
+  /* "wallpaper" para juzgar la transparencia */
+  .stage{
+    position:relative; border-radius:8px; overflow:hidden;
+    border:1px solid #202726;
+    background:
+      radial-gradient(120% 200% at 15% 20%, #3d4a44 0%, transparent 55%),
+      radial-gradient(90% 160% at 78% 85%, #35424d 0%, transparent 60%),
+      radial-gradient(60% 90% at 52% 10%, #56605c 0%, transparent 70%),
+      linear-gradient(120deg,#202a29 0%,#2b3634 40%,#1c2528 75%,#182022 100%);
+    padding:30px 0;
+  }
+  .bar{display:grid;grid-template-columns:1fr auto 1fr;align-items:center;width:100%}
+  .left{justify-self:start;display:flex;align-items:center}
+  .right{justify-self:end;display:flex;align-items:center}
+
+  /* ═══ 1 · FLAT ═══ */
+  .b1{
+    height:16px; background:rgba(18,22,22,.88);
+    border-top:1px solid rgba(51,60,65,.75);
+  }
+  .b1 .m{background:none;border:0;padding:0 9px;color:var(--text);font-size:10px;
+         font-variant-numeric:tabular-nums;transition:.2s}
+  .b1 .right{gap:4px}
+  .b1 .m:hover{color:var(--white);background:rgba(216,230,234,.05)}
+  .b1 .clock{color:var(--white);font-weight:600;letter-spacing:.06em}
+  .b1 .ws{display:flex;padding-left:6px}
+  .b1 .ws span{padding:0 4px;color:rgba(131,141,149,.5);font-size:10px}
+  .b1 .ws span.on{color:var(--accent);font-weight:700}
+  .b1 .ws span:hover{color:var(--text)}
+
+  /* ═══ 2 · ISLAS ═══ */
+  .b2{height:24px;background:rgba(18,22,22,.6);border-top:1px solid rgba(51,60,65,.7)}
+  .b2 .m{background:rgba(25,30,30,.95);padding:0 10px;margin:4px 0;color:var(--text);
+         font-size:10px;font-variant-numeric:tabular-nums;transition:.2s}
+  .b2 .m:hover{background:var(--raised);color:var(--white)}
+  .b2 .grp{display:flex;align-items:center}
+  .b2 .grp>.m+.m{border-left:1px solid rgba(51,60,65,.55)}
+  .b2 .grp>.m:first-child{border-radius:7px 0 0 7px}
+  .b2 .grp>.m:last-child{border-radius:0 7px 7px 0}
+  .b2 .grp+.grp{margin-left:6px}
+  .b2 .rec{border-radius:7px;margin-left:6px;color:rgba(131,141,149,.35);background:none}
+  .b2 .clock{border-radius:7px;padding:0 14px;color:var(--white);font-weight:600;letter-spacing:.05em}
+  .b2 .ws{display:flex;padding-left:6px}
+  .b2 .ws span{padding:0 5px;margin:4px 0;color:rgba(131,141,149,.6);font-size:10px}
+  .b2 .ws span.on{background:rgba(216,230,234,.92);color:var(--void);font-weight:700;border-radius:5px}
+  .b2 .ws span:hover{background:rgba(216,230,234,.07);color:var(--text)}
+  .b2 .right{margin-right:6px}
+
+  /* ═══ 3 · SUBRAYADO ═══ */
+  .b3{height:18px;background:rgba(18,22,22,.85)}
+  .b3 .m{background:none;padding:1px 9px 0;margin:0 2px;color:var(--text);font-size:10px;
+         border-bottom:1px solid rgba(51,60,65,.45);font-variant-numeric:tabular-nums;transition:.2s}
+  .b3 .m:hover{color:var(--white);border-bottom-color:rgba(216,230,234,.7);background:rgba(216,230,234,.04)}
+  .b3 .clock{color:var(--white);font-weight:600;border-bottom-color:rgba(216,230,234,.55);letter-spacing:.05em}
+  .b3 .ws{display:flex;padding-left:6px}
+  .b3 .ws span{padding:1px 4px 0;margin:0 1px;border-bottom:1px solid transparent;
+               color:rgba(131,141,149,.45);font-size:10px}
+  .b3 .ws span.on{color:var(--accent);font-weight:700;border-bottom:2px solid var(--accent)}
+  .b3 .ws span:hover{color:var(--text);border-bottom-color:rgba(131,141,149,.5)}
+
+  /* ═══ 4 · CHIPS ═══ */
+  .b4{height:22px;background:rgba(18,22,22,.9);border-top:1px solid rgba(51,60,65,.5)}
+  .b4 .m{background:rgba(33,39,41,.75);border-radius:4px;padding:0 8px;margin:3px 0;font-size:10px;
+         font-variant-numeric:tabular-nums;transition:.2s}
+  .b4 .right{gap:5px}
+  .b4 .cpu{color:var(--sage-hi)} .b4 .mem{color:var(--slate-hi)} .b4 .temp{color:var(--brass-hi)}
+  .b4 .aud{color:var(--violet-hi)} .b4 .net{color:var(--patina-hi)} .b4 .bat{color:var(--sage-hi)}
+  .b4 .clock{color:var(--white);font-weight:600;letter-spacing:.04em}
+  .b4 .m:hover{background:var(--raised);color:var(--white)}
+  .b4 .ws{display:flex;padding-left:5px}
+  .b4 .ws span{padding:0 5px;margin:3px 1px;border-radius:3px;color:rgba(131,141,149,.5);font-size:10px}
+  .b4 .ws span.on{background:var(--accent);color:var(--void);font-weight:700}
+  .b4 .ws span:hover{background:rgba(216,230,234,.08);color:var(--text)}
+
+  /* ═══ 5/6 · HÍBRIDO: islas contiguas + color por módulo ═══ */
+  .b5,.b6{background:rgba(18,22,22,.88);border-top:1px solid rgba(51,60,65,.7)}
+  .b5{height:14px;--r:4px;align-items:stretch}
+  .b6{height:12px;--r:3px;align-items:stretch}
+  .b5 .m,.b6 .m{background:rgba(33,39,41,.9);padding:0 9px;margin:0;border-radius:0;
+                color:var(--text);font-variant-numeric:tabular-nums;transition:.2s;
+                display:inline-flex;align-items:center;height:100%}
+  .b6 .m{padding:0 7px;font-size:8px}
+  .b5 .right,.b6 .right{gap:6px;margin-right:6px}
+  .b5 .grp,.b6 .grp{display:flex;align-items:center;height:100%}
+  .b5 .grp .m+.m,.b6 .grp .m+.m{border-left:1px solid rgba(11,14,13,.55)}
+  .b5 .grp .m:first-child,.b6 .grp .m:first-child{border-radius:var(--r) 0 0 var(--r)}
+  .b5 .grp .m:last-child,.b6 .grp .m:last-child{border-radius:0 var(--r) var(--r) 0}
+  .b5 .cpu,.b6 .cpu{color:var(--sage-hi)}
+  .b5 .mem,.b6 .mem{color:var(--slate-hi)}
+  .b5 .temp,.b6 .temp{color:var(--brass-hi)}
+  .b5 .aud,.b6 .aud{color:var(--violet-hi)}
+  .b5 .net,.b6 .net{color:var(--patina-hi)}
+  .b5 .bat,.b6 .bat{color:var(--text)}
+  .b5 .clock,.b6 .clock{border-radius:var(--r);padding:0 13px;color:var(--white);
+                        font-weight:600;letter-spacing:.05em;background:rgba(33,39,41,.9)}
+  .b6 .clock{padding:0 10px}
+  .b5 .m:hover,.b6 .m:hover{background:var(--raised);color:var(--white)}
+  .b5 .left,.b5 .right,.b6 .left,.b6 .right{align-items:stretch}
+  .b5 .ws,.b6 .ws{display:flex;padding-left:5px;height:100%}
+  .b5 .ws span,.b6 .ws span{padding:0 5px;margin:0 1px;border-radius:3px;
+                            color:rgba(131,141,149,.5);font-size:10px;
+                            display:inline-flex;align-items:center;height:100%}
+  .b6 .ws span{padding:0 4px;font-size:8px}
+  .b5 .ws span.on,.b6 .ws span.on{background:var(--accent);color:var(--void);font-weight:700}
+  .b5 .ws span:hover,.b6 .ws span:hover{background:rgba(216,230,234,.08);color:var(--text)}
+
+  .tip{margin-top:12px;font-size:10.5px;color:var(--muted);line-height:1.8}
+  .tip b{color:var(--accent);font-weight:500}
+  footer{margin-top:10px;font-size:10.5px;color:var(--muted);line-height:2;border-top:1px solid #1c2222;padding-top:22px}
+  footer code{color:var(--accent);background:rgba(216,230,234,.07);padding:1px 5px;border-radius:3px}
+</style>
+</head>
+<body>
+
+<h1>waybar · comparativa de temas</h1>
+<p class="sub">Mismos datos, misma paleta <code>HAZ</code>, misma tipografía (10px). Solo cambia la forma.
+Pasá el mouse por los módulos: los estados <code>hover</code> son reales. Las transparencias se juzgan contra el “wallpaper” simulado.</p>
+
+<!-- ══════════ 1 ══════════ -->
+<section class="case">
+  <header><h2>1 · Flat / tira de texto</h2><div class="meta">height <b>16</b> · spacing <b>4</b> · sin fondos, sin bordes</div></header>
+  <div class="stage">
+    <div class="bar b1">
+      <div class="left"><div class="ws"><span class="on">1</span><span>2</span><span>3</span><span>4</span></div></div>
+      <div class="center"><span class="m clock">26 - 02:37</span></div>
+      <div class="right">
+        <span class="m">37%</span><span class="m">5.2G</span><span class="m">48°C</span>
+        <span class="m">62%</span><span class="m">Casita</span><span class="m">84%</span>
+      </div>
+    </div>
+  </div>
+  <p class="tip">Lectura más limpia. Sin cajas el ojo sigue la línea, pero <b>los números pierden contexto</b>:
+  “37% 5.2G 48°C” sin iconos ni separación es ambiguo. La solución está en añadir iconos Nerd Font.</p>
+</section>
+
+<!-- ══════════ 2 ══════════ -->
+<section class="case">
+  <header><h2>2 · Islas (grupos contiguos)</h2><div class="meta">height <b>24</b> · spacing <b>0</b> · redondeo solo en extremos</div></header>
+  <div class="stage">
+    <div class="bar b2">
+      <div class="left"><div class="ws"><span class="on">1</span><span>2</span><span>3</span><span>4</span></div></div>
+      <div class="center"><span class="m clock">26 - 02:37</span></div>
+      <div class="right">
+        <span class="m rec"></span>
+        <div class="grp"><span class="m">37%</span><span class="m">5.2G</span><span class="m">48°C</span></div>
+        <div class="grp"><span class="m">62%</span><span class="m">Casita</span><span class="m">84%</span></div>
+      </div>
+    </div>
+  </div>
+  <p class="tip">El que <b>más cambia la lectura</b>: deja de haber 7 objetos sueltos y pasan a ser 2 paneles + reloj.
+  Los separadores internos agrupan por función (sistema / conectividad) sin añadir más formas.</p>
+</section>
+
+<!-- ══════════ 3 ══════════ -->
+<section class="case">
+  <header><h2>3 · Subrayado / línea de registro</h2><div class="meta">height <b>18</b> · spacing <b>4</b> · hairline inferior</div></header>
+  <div class="stage">
+    <div class="bar b3">
+      <div class="left"><div class="ws"><span class="on">1</span><span>2</span><span>3</span><span>4</span></div></div>
+      <div class="center"><span class="m clock">26 - 02:37</span></div>
+      <div class="right">
+        <span class="m">37%</span><span class="m">5.2G</span><span class="m">48°C</span>
+        <span class="m">62%</span><span class="m">Casita</span><span class="m">84%</span>
+      </div>
+    </div>
+  </div>
+  <p class="tip">Muy cerca del flat, pero la hairline le da <b>estructura sin volumen</b>. El acento se gana subrayando,
+  así que los estados críticos (rojo) se leen sin bloques de color gritando.</p>
+</section>
+
+<!-- ══════════ 4 ══════════ -->
+<section class="case">
+  <header><h2>4 · Chips semánticos</h2><div class="meta">height <b>22</b> · spacing <b>5</b> · radio 4, sin bordes, color por función</div></header>
+  <div class="stage">
+    <div class="bar b4">
+      <div class="left"><div class="ws"><span class="on">1</span><span>2</span><span>3</span><span>4</span></div></div>
+      <div class="center"><span class="m clock">26 - 02:37</span></div>
+      <div class="right">
+        <span class="m cpu">37%</span><span class="m mem">5.2G</span><span class="m temp">48°C</span>
+        <span class="m aud">62%</span><span class="m net">Casita</span><span class="m bat">84%</span>
+      </div>
+    </div>
+  </div>
+  <p class="tip">Esquinas de 4px en lugar de 7: se lee <b>técnico, no “burbuja”</b>. El color da identidad por módulo,
+  lo que compensa la falta de iconos. Es el más expresivo y el que menos se parece a lo que tienes hoy.</p>
+</section>
+
+<!-- ══════════ 5 ══════════ -->
+<section class="case">
+  <header><h2>5 · Híbrido (islas + chips)</h2><div class="meta">height <b>14</b> · spacing <b>0</b> · full-bleed · font 10px</div></header>
+  <div class="stage">
+    <div class="bar b5">
+      <div class="left"><div class="ws"><span class="on">1</span><span>2</span><span>3</span><span>4</span></div></div>
+      <div class="center"><span class="m clock">26 - 02:37</span></div>
+      <div class="right">
+        <div class="grp"><span class="m cpu">37%</span><span class="m mem">5.2G</span><span class="m temp">48°C</span></div>
+        <div class="grp"><span class="m aud">62%</span><span class="m net">Casita</span><span class="m bat">84%</span></div>
+      </div>
+    </div>
+  </div>
+  <p class="tip">Continua como las islas, coloreada como los chips. Sin aire vertical: los bloques tocan
+  los bordes, así que <b>no se gasta ni un píxel</b>. Es el mínimo real con tipografía de 10px.</p>
+</section>
+
+<!-- ══════════ 6 ══════════ -->
+<section class="case">
+  <header><h2>6 · Híbrido mini</h2><div class="meta">height <b>12</b> · spacing <b>0</b> · font <b>8px</b></div></header>
+  <div class="stage">
+    <div class="bar b6">
+      <div class="left"><div class="ws"><span class="on">1</span><span>2</span><span>3</span><span>4</span></div></div>
+      <div class="center"><span class="m clock">26 - 02:37</span></div>
+      <div class="right">
+        <div class="grp"><span class="m cpu">37%</span><span class="m mem">5.2G</span><span class="m temp">48°C</span></div>
+        <div class="grp"><span class="m aud">62%</span><span class="m net">Casita</span><span class="m bat">84%</span></div>
+      </div>
+    </div>
+  </div>
+  <p class="tip">Los <b>12px reales</b> que pediste, pero la tipografía baja a 8px: se lee, aunque es el límite.
+  Compáralo con el 5 antes de decidir.</p>
+</section>
+
+<footer>
+  <code>~/.config/waybar/apply-theme.sh next</code> → cicla los 4 en la barra real (ajusta height/spacing solo).<br>
+  <code>~/.config/waybar/apply-theme.sh restore</code> → vuelve a tu config original.<br>
+  Los estados <b>crítico / cargando / silenciado</b> no están en esta hoja: se ven mejor en vivo.
+</footer>
+
+</body>
+</html>

@@ -41,7 +41,6 @@ mason_lspconfig.setup({
     "lua_ls",
     "pyright",
     "ts_ls",
-    "clangd",
     "rust_analyzer",
     "gopls",
   },

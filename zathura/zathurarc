@@ -1,12 +1,12 @@
-# Include pywal colors
-include /home/patitomora/.cache/wal/colors-zathura
+# Include noir theme colors
+include /home/kikoperex/.config/theme/colors-zathura
 
 # Font configuration
 set font "JetBrains Mono 12"
 
-# Custom settings (override pywal defaults if needed)
+# Custom settings
 set recolor "true"
-set default-bg rgba(0,0,0,0.7)
+set default-bg rgba(5,5,5,0.9)
 set recolor-lightcolor rgba(0,0,0,0)
 set adjust-open "width"
 set guioptions ""

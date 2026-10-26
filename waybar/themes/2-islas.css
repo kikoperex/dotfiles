@@ -1,0 +1,185 @@
+/* ═══════════════════════════════════════════════════════════════
+ *  ALTERNATIVA 2 — "Islas" (grupos contiguos)
+ *  En vez de 7 píldoras sueltas: 2 bloques sólidos + reloj aislado.
+ *  Solo los extremos del grupo llevan esquinas redondeadas → deja de
+ *  leerse como "sopa de cápsulas" y se lee como panel.
+ *
+ *  ⚠ REQUIERE en ~/.config/waybar/config:
+ *      "spacing": 0,
+ *      "height": 24
+ *  (el height 24 da aire para que el relleno no ahogue el texto de 10px)
+ * ═══════════════════════════════════════════════════════════════ */
+
+@import "/home/kikoperex/.config/theme/colors.css";
+
+* {
+    border: none;
+    border-radius: 0;
+    font-family: "JetBrainsMono Nerd Font Mono", "Noto Color Emoji", "JetBrains Mono", monospace;
+    font-size: 10px;
+    min-height: 0;
+}
+
+window#waybar {
+    background-color: alpha(@background, 0.6);
+    border-top: 1px solid alpha(@border, 0.7);
+    color: @text;
+}
+
+window#waybar.hidden { opacity: 0.2; }
+
+/* ── Base de todos los módulos: pegados, sin esquinas ───────── */
+#clock,
+#battery,
+#pulseaudio,
+#network,
+#cpu,
+#memory,
+#temperature,
+#custom-recording {
+    background-color: alpha(@surface, 0.95);
+    padding: 0 10px;
+    margin: 4px 0;
+    color: @text;
+    font-feature-settings: "tnum";
+    transition: background-color .2s ease, color .2s ease;
+}
+
+#cpu:hover,
+#memory:hover,
+#temperature:hover,
+#pulseaudio:hover,
+#network:hover,
+#battery:hover {
+    background-color: @raised;
+    color: @white;
+}
+
+/* ── Isla 1 · sistema: [cpu│mem│temp] ───────────────────────── */
+#cpu {
+    border-top-left-radius: 7px;
+    border-bottom-left-radius: 7px;
+}
+
+#temperature {
+    border-top-right-radius: 7px;
+    border-bottom-right-radius: 7px;
+}
+
+/* separadores internos, sin caja alrededor */
+#memory,
+#temperature { border-left: 1px solid alpha(@border, 0.55); }
+
+/* ── Isla 2 · conectividad: [audio│red│batería] ─────────────── */
+#pulseaudio {
+    margin-left: 6px;                 /* aire entre las dos islas */
+    border-top-left-radius: 7px;
+    border-bottom-left-radius: 7px;
+}
+
+#battery {
+    margin-right: 6px;
+    border-top-right-radius: 7px;
+    border-bottom-right-radius: 7px;
+}
+
+#network,
+#battery { border-left: 1px solid alpha(@border, 0.55); }
+
+/* ── Grabación: satélite suelto, esquina propia ─────────────── */
+#custom-recording {
+    border-radius: 7px;
+    margin-left: 6px;
+    color: @muted;
+}
+
+/* ── Reloj: pieza aislada (la única "cápsula" de la barra) ──── */
+#clock {
+    border-radius: 7px;
+    padding: 0 14px;
+    color: @white;
+    font-weight: 600;
+    letter-spacing: .05em;
+}
+
+/* ── Workspaces: bloque compacto ────────────────────────────── */
+#workspaces {
+    margin-left: 6px;
+    padding: 0;
+    background: transparent;
+}
+
+#workspaces button {
+    padding: 0 5px;
+    margin: 4px 0;
+    background: transparent;
+    border-radius: 0;
+    color: alpha(@muted, 0.6);
+}
+
+#workspaces button:first-child {
+    border-top-left-radius: 7px;
+    border-bottom-left-radius: 7px;
+}
+
+#workspaces button:last-child {
+    border-top-right-radius: 7px;
+    border-bottom-right-radius: 7px;
+}
+
+#workspaces button:hover {
+    background: alpha(@accent, 0.07);
+    color: @text;
+}
+
+#workspaces button.active {
+    background: alpha(@accent, 0.92);
+    color: @void;
+    font-weight: 700;
+    border-radius: 5px;              /* el activo SÍ conserva forma propia */
+}
+
+#workspaces button.urgent {
+    background: @red;
+    color: @void;
+}
+
+/* ── Estados ────────────────────────────────────────────────── */
+#battery.charging,
+#battery.plugged {
+    background-color: alpha(@sage, 0.85);
+    color: @void;
+}
+
+#battery.warning:not(.charging) { color: @brass; }
+
+#battery.critical:not(.charging),
+#temperature.critical,
+#custom-recording.recording {
+    background-color: @red;
+    color: @void;
+    animation-name: blink;
+    animation-duration: 0.7s;
+    animation-timing-function: linear;
+    animation-iteration-count: infinite;
+    animation-direction: alternate;
+}
+
+#network.disconnected {
+    background-color: alpha(@red, 0.85);
+    color: @void;
+}
+
+#pulseaudio.muted {
+    background-color: alpha(@raised, 0.9);
+    color: alpha(@muted, 0.7);
+}
+
+#custom-recording.not-recording {
+    background: transparent;
+    color: alpha(@muted, 0.35);
+}
+
+@keyframes blink {
+    to { background-color: @brass; color: @void; }
+}

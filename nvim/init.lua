@@ -10,5 +10,4 @@ require("user.colors")
 require("user.treesitter")
 require("user.lsp")
 require("user.cmp")
-require("user.autocmds")
 

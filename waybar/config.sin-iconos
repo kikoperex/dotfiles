@@ -1,0 +1,78 @@
+{
+    "layer": "bottom",
+    "position": "bottom",
+    "height": 14,
+    "spacing": 0,
+    "modules-left": ["hyprland/workspaces"],
+    "modules-center": ["clock"],
+    "modules-right": ["custom/recording", "cpu", "memory", "temperature", "pulseaudio", "network", "battery"],
+    
+    "hyprland/workspaces": {
+        "disable-scroll": false,
+        "all-outputs": true,
+        "format": "{id}",
+        "active-only": false,
+        "show-special": false
+    },
+    
+    "custom/recording": {
+        "exec": "~/.config/scripts/recording-status.sh",
+        "return-type": "json",
+        "interval": 2,
+        "format": "{}",
+        "on-click": "pkill gpu-screen"
+    },
+    
+    "clock": {
+        "timezone": "America/Mexico_City",
+        "tooltip-format": "<big>{:%Y %B}</big>\n<tt><small>{calendar}</small></tt>",
+        "format-alt": "{:%A}",
+        "format": "{:%d - %I:%M}"
+    },
+    
+    "cpu": {
+        "format": "{usage}%",
+        "tooltip": false,
+        "interval": 1
+    },
+    
+    "memory": {
+        "format": "{used:.1f}G",
+        "tooltip-format": "RAM: {used:.1f}G/{total:.1f}G ({percentage}%)"
+    },
+    
+    "temperature": {
+        "hwmon-path": "/sys/class/hwmon/hwmon1/temp1_input",
+        "critical-threshold": 80,
+        "format": "{temperatureC}°C",
+        "format-critical": "{temperatureC}°C"
+    },
+    
+    "battery": {
+        "states": {
+            "warning": 30,
+            "critical": 15
+        },
+        "format": "{capacity}%",
+        "format-charging": "{capacity}%",
+        "format-plugged": "{capacity}%",
+        "format-alt": "{time}"
+    },
+    
+    "network": {
+        "format-wifi": "{essid}",
+        "format-ethernet": "{ipaddr}/{cidr} ↑ {bandwidthUpBytes} ↓ {bandwidthDownBytes}",
+        "tooltip-format": "{ifname} via {gwaddr} \nUp: {bandwidthUpBytes} Down: {bandwidthDownBytes}",
+        "format-linked": "{ifname} (sin IP)",
+        "format-disconnected": "sin conexión",
+        "format-alt": "{ifname}: {ipaddr}/{cidr}"
+    },
+    
+    "pulseaudio": {
+        "format": "{volume}% {desc}",
+        "format-bluetooth": "{volume}% {desc}",
+        "format-bluetooth-muted": "{desc}",
+        "format-muted": "{desc}",
+        "on-click": "pavucontrol"
+    }
+}

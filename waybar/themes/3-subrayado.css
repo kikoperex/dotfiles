@@ -1,0 +1,144 @@
+/* ═══════════════════════════════════════════════════════════════
+ *  ALTERNATIVA 3 — "Subrayado / línea de registro"
+ *  Nada de cajas: una hairline inferior bajo cada módulo. El acento
+ *  se gana subrayando, no rellenando. Muy barato en altura (12px OK).
+ * ═══════════════════════════════════════════════════════════════ */
+
+@import "/home/kikoperex/.config/theme/colors.css";
+
+* {
+    border: none;
+    border-radius: 0;
+    font-family: "JetBrainsMono Nerd Font Mono", "Noto Color Emoji", "JetBrains Mono", monospace;
+    font-size: 10px;
+    min-height: 0;
+}
+
+window#waybar {
+    background-color: alpha(@background, 0.85);
+    border: none;
+    color: @text;
+}
+
+window#waybar.hidden { opacity: 0.2; }
+
+/* ── Módulos: textura de "renglón" ──────────────────────────── */
+#clock,
+#battery,
+#pulseaudio,
+#network,
+#cpu,
+#memory,
+#temperature,
+#custom-recording {
+    background: transparent;
+    border: none;
+    border-bottom: 1px solid alpha(@border, 0.45);
+    border-radius: 0;
+    padding: 1px 9px 0 9px;
+    margin: 0 2px;
+    color: @text;
+    font-feature-settings: "tnum";
+    transition: color .2s ease, border-color .2s ease, background-color .25s ease;
+}
+
+/* el subrayado es el único elemento que "enciende" */
+#cpu:hover,
+#memory:hover,
+#temperature:hover,
+#pulseaudio:hover,
+#network:hover,
+#battery:hover,
+#clock:hover {
+    color: @white;
+    border-bottom-color: alpha(@accent, 0.7);
+    background-color: alpha(@accent, 0.04);
+}
+
+#clock {
+    color: @white;
+    font-weight: 600;
+    border-bottom-color: alpha(@accent, 0.55);
+    letter-spacing: .05em;
+}
+
+#custom-recording { color: alpha(@muted, 0.7); }
+
+/* ── Workspaces: el activo es un subrayado sólido ───────────── */
+#workspaces {
+    margin-left: 6px;
+    padding: 0;
+    background: transparent;
+}
+
+#workspaces button {
+    padding: 1px 4px 0 4px;
+    margin: 0 1px;
+    background: transparent;
+    border: none;
+    border-bottom: 1px solid transparent;
+    border-radius: 0;
+    color: alpha(@muted, 0.45);
+    transition: all .2s ease;
+}
+
+#workspaces button:hover {
+    background: transparent;
+    color: @text;
+    border-bottom-color: alpha(@muted, 0.5);
+}
+
+#workspaces button.active {
+    background: transparent;
+    color: @accent;
+    font-weight: 700;
+    border-bottom: 2px solid @accent;
+    padding-bottom: 0;
+}
+
+#workspaces button.urgent {
+    background: transparent;
+    color: @red;
+    border-bottom-color: @red;
+    font-weight: 700;
+}
+
+/* ── Estados: también en la línea ───────────────────────────── */
+#battery.charging,
+#battery.plugged {
+    color: @sage;
+    border-bottom-color: @sage;
+}
+
+#battery.warning:not(.charging) {
+    color: @brass;
+    border-bottom-color: @brass;
+}
+
+#network.disconnected {
+    color: @red;
+    border-bottom-color: @red;
+}
+
+#pulseaudio.muted { color: alpha(@muted, 0.4); }
+
+#battery.critical:not(.charging),
+#temperature.critical,
+#custom-recording.recording {
+    color: @red;
+    border-bottom-color: @red;
+    animation-name: line-pulse;
+    animation-duration: 1s;
+    animation-timing-function: ease-in-out;
+    animation-iteration-count: infinite;
+    animation-direction: alternate;
+}
+
+#custom-recording.not-recording {
+    color: alpha(@muted, 0.3);
+    border-bottom-color: transparent;
+}
+
+@keyframes line-pulse {
+    to { color: @red_hi; border-bottom-color: @red_hi; }
+}

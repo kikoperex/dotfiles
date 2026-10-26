@@ -31,8 +31,11 @@ fi
 
 # Update hyprpaper config
 cat > "$HYPRPAPER_CONFIG" << EOF
-preload = $wallpaper_path
-wallpaper = ,$wallpaper_path
+wallpaper {
+    monitor = 
+    path = $wallpaper_path
+    fit_mode = cover
+}
 EOF
 
 # Kill existing hyprpaper and restart it

@@ -8,6 +8,6 @@ WALLPAPER=$(find "$WALLPAPER_DIR" -type f ! -name "$(basename "$CURRENT_WALL")" 
 
 # Apply the selected wallpaper
 hyprctl hyprpaper reload ,"$WALLPAPER"
-wal -i "$WALLPAPER" --cols16 --backend colorthief --saturate 0.4 -b 000000 -n
+wal -i "$WALLPAPER" --cols16 --saturate 0.6 -b 000000 -n
 notify-send "Theme changed to: " $WALLPAPER
 pkill -f swaync && swaync

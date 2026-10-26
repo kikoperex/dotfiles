@@ -1,8 +1,8 @@
 {
     "layer": "bottom",
     "position": "bottom",
-    "height": 12,
-    "spacing": 4,
+    "height": 14,
+    "spacing": 0,
     "modules-left": ["hyprland/workspaces"],
     "modules-center": ["clock"],
     "modules-right": ["custom/recording", "cpu", "memory", "temperature", "pulseaudio", "network", "battery"],
@@ -31,21 +31,21 @@
     },
     
     "cpu": {
-        "format": "{usage}% ",
+        "format": " {usage}%",
         "tooltip": false,
         "interval": 1
     },
     
     "memory": {
-        "format": "{used:.1f}G ",
+        "format": "󰍛 {used:.1f}G",
         "tooltip-format": "RAM: {used:.1f}G/{total:.1f}G ({percentage}%)"
     },
     
     "temperature": {
         "hwmon-path": "/sys/class/hwmon/hwmon1/temp1_input",
         "critical-threshold": 80,
-        "format": "{temperatureC}°C ",
-        "format-critical": "{temperatureC}°C "
+        "format": " {temperatureC}°C",
+        "format-critical": " {temperatureC}°C"
     },
     
     "battery": {
@@ -53,36 +53,26 @@
             "warning": 30,
             "critical": 15
         },
-        "format": "{capacity}% {icon}",
-        "format-charging": "{capacity}% ",
-        "format-plugged": "{capacity}% ",
-        "format-alt": "{time} {icon}",
-        "format-icons": ["", "", "", "", ""]
+        "format": " {capacity}%",
+        "format-charging": " {capacity}%",
+        "format-plugged": " {capacity}%",
+        "format-alt": " {time}"
     },
     
     "network": {
-        "format-wifi": "{essid}",
-        "format-ethernet": "{ipaddr}/{cidr} ↑ {bandwidthUpBytes} ↓ {bandwidthDownBytes}",
+        "format-wifi": " {essid}",
+        "format-ethernet": "󰈀 {ipaddr}/{cidr} ↑ {bandwidthUpBytes} ↓ {bandwidthDownBytes}",
         "tooltip-format": "{ifname} via {gwaddr} \nUp: {bandwidthUpBytes} Down: {bandwidthDownBytes}",
-        "format-linked": "{ifname} (No IP) ",
-        "format-disconnected": "Disconnected ⚠",
+        "format-linked": "󰈀 {ifname} (sin IP)",
+        "format-disconnected": "󰖪 sin conexión",
         "format-alt": "{ifname}: {ipaddr}/{cidr}"
     },
     
     "pulseaudio": {
-        "format": "{volume}% {icon} {desc}",
-        "format-bluetooth": "{volume}% {icon} {desc}",
-        "format-bluetooth-muted": " {icon} {desc}",
-        "format-muted": " {icon} {desc}",
-        "format-icons": {
-            "headphone": "",
-            "hands-free": "",
-            "headset": "", 
-            "phone": "",
-            "portable": "",
-            "car": "",
-            "default": ["", "", ""]
-        },
+        "format": " {volume}% {desc}",
+        "format-bluetooth": " {volume}% {desc}",
+        "format-bluetooth-muted": " {desc}",
+        "format-muted": " {desc}",
         "on-click": "pavucontrol"
     }
 }

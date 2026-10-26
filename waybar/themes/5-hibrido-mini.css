@@ -1,0 +1,183 @@
+/* ═══════════════════════════════════════════════════════════════
+ *  ALTERNATIVA 6 — "Híbrido mini": el mismo híbrido, 12px reales
+ *
+ *  · Continua como las islas: 2 bloques + reloj, no 7 objetos sueltos.
+ *  · Coloreada como los chips: cada módulo tiene su tono semántico.
+ *  · 12px es el mínimo absoluto: obliga a bajar la tipografía 10 → 8px
+ *    (medido: 10px exige 14 · 9px exige 13 · 8px exige 12)
+ *
+ *  ⚠ REQUIERE en ~/.config/waybar/config:
+ *      "height": 12,
+ *      "spacing": 0
+ * ═══════════════════════════════════════════════════════════════ */
+
+@import "/home/kikoperex/.config/theme/colors.css";
+
+* {
+    border: none;
+    border-radius: 0;
+    font-family: "JetBrainsMono Nerd Font Mono", "Noto Color Emoji", "JetBrains Mono", monospace;
+    font-size: 8px;
+    min-height: 0;
+}
+
+window#waybar {
+    background-color: alpha(@background, 0.88);
+    /* línea superior dibujada por dentro: no consume altura de layout */
+    box-shadow: inset 0 1px 0 alpha(@border, 0.7);
+    color: @text;
+}
+
+window#waybar.hidden { opacity: 0.2; }
+
+/* ── Base: bloque contiguo, sin aire vertical ───────────────── */
+#clock,
+#battery,
+#pulseaudio,
+#network,
+#cpu,
+#memory,
+#temperature,
+#custom-recording {
+    background-color: alpha(@raised, 0.9);
+    border: none;
+    border-radius: 0;
+    padding: 0 7px;
+    margin: 0;                        /* full-bleed: 0 px desperdiciados */
+    color: @text;
+    font-feature-settings: "tnum";
+    transition: background-color .2s ease, color .2s ease;
+}
+
+/* ── Un tono por función (los *_hi, legibles sobre @raised) ─── */
+#cpu         { color: @sage_hi; }
+#memory      { color: @slate_hi; }
+#temperature { color: @brass_hi; }
+#pulseaudio  { color: @violet_hi; }
+#network     { color: @patina_hi; }
+#battery     { color: @text; }
+#clock       { color: @white; font-weight: 600; letter-spacing: .05em; }
+#custom-recording { color: alpha(@muted, 0.55); }
+
+/* ── Costuras: 1px de sombra entre módulos, no bordes ──────── */
+#memory,
+#temperature,
+#network,
+#battery { border-left: 1px solid alpha(@void, 0.55); }
+
+/* ── Isla 1 · sistema: [cpu│mem│temp] ───────────────────────── */
+#cpu         { border-top-left-radius: 4px; border-bottom-left-radius: 4px; }
+#temperature { border-top-right-radius: 4px; border-bottom-right-radius: 4px; }
+
+/* ── Isla 2 · conectividad: [audio│red│batería] ─────────────── */
+#pulseaudio {
+    margin-left: 6px;                 /* separación entre las dos islas */
+    border-top-left-radius: 4px;
+    border-bottom-left-radius: 4px;
+}
+
+#battery {
+    margin-right: 6px;
+    border-top-right-radius: 4px;
+    border-bottom-right-radius: 4px;
+}
+
+/* ── Reloj: pieza aislada ───────────────────────────────────── */
+#clock {
+    border-radius: 3px;
+    padding: 0 10px;
+}
+
+/* ── Grabación: satélite ───────────────────────────────────── */
+#custom-recording {
+    border-radius: 3px;
+    margin-left: 6px;
+}
+
+/* ── Hover ─────────────────────────────────────────────────── */
+#cpu:hover,
+#memory:hover,
+#temperature:hover,
+#pulseaudio:hover,
+#network:hover,
+#battery:hover {
+    background-color: @raised;
+    color: @white;
+}
+
+/* ── Workspaces ────────────────────────────────────────────── */
+#workspaces {
+    margin-left: 5px;
+    padding: 0;
+    background: transparent;
+}
+
+#workspaces button {
+    padding: 0 4px;
+    margin: 0;
+    background: transparent;
+    border-radius: 3px;
+    color: alpha(@muted, 0.5);
+    transition: all .2s ease;
+}
+
+#workspaces button:hover {
+    background: alpha(@accent, 0.08);
+    color: @text;
+}
+
+#workspaces button.active {
+    background: @accent;
+    color: @void;
+    font-weight: 700;
+}
+
+#workspaces button.urgent {
+    background: @red;
+    color: @void;
+}
+
+/* ── Estados ───────────────────────────────────────────────── */
+#battery.charging,
+#battery.plugged {
+    background-color: alpha(@sage, 0.22);
+    color: @sage_hi;
+}
+
+#battery.warning:not(.charging) {
+    background-color: alpha(@brass, 0.2);
+    color: @brass_hi;
+}
+
+#battery.critical:not(.charging),
+#temperature.critical,
+#custom-recording.recording {
+    background-color: @red;
+    color: @void;
+    animation-name: blink;
+    animation-duration: 0.7s;
+    animation-timing-function: linear;
+    animation-iteration-count: infinite;
+    animation-direction: alternate;
+}
+
+#network.disconnected {
+    background-color: alpha(@red, 0.25);
+    color: @red_hi;
+}
+
+#pulseaudio.muted {
+    background-color: alpha(@surface, 0.65);
+    color: alpha(@muted, 0.45);
+}
+
+#custom-recording.not-recording {
+    background: transparent;
+    padding: 0;
+    margin: 0;
+    color: alpha(@muted, 0.3);
+}
+
+@keyframes blink {
+    to { background-color: @brass; color: @void; }
+}
