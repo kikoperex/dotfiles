@@ -1,0 +1,50 @@
+/* HAZ — derivada de wallhaven-xe5pxo_3840x2160.png
+ * Sombras verde-gris → humo azul → haz de plata.
+ */
+
+@define-color background #121616;
+@define-color foreground #c7cace;
+@define-color cursor #d8e6ea;
+
+/* Base semántica */
+@define-color void #0b0e0d;
+@define-color surface #191e1e;
+@define-color raised #212729;
+@define-color border #333c41;
+@define-color muted #838d95;
+@define-color text #c7cace;
+@define-color white #e6e8e9;
+@define-color accent #d8e6ea;
+@define-color accent_dim #9fb4ba;
+
+/* Señales */
+@define-color red #c2665f;
+@define-color red_hi #d17a72;
+@define-color sage #86a38c;
+@define-color sage_hi #9fbca5;
+@define-color brass #bfa877;
+@define-color brass_hi #d8c29b;
+@define-color slate #7c97ab;
+@define-color slate_hi #9bb6c9;
+@define-color violet #9e8ba8;
+@define-color violet_hi #bcaac5;
+@define-color patina #82a6a1;
+@define-color patina_hi #a2c4bf;
+
+/* ANSI 16 */
+@define-color color0 #141a19;
+@define-color color1 #c2665f;
+@define-color color2 #86a38c;
+@define-color color3 #bfa877;
+@define-color color4 #7c97ab;
+@define-color color5 #9e8ba8;
+@define-color color6 #82a6a1;
+@define-color color7 #a6adb4;
+@define-color color8 #3a4348;
+@define-color color9 #d17a72;
+@define-color color10 #9fbca5;
+@define-color color11 #d8c29b;
+@define-color color12 #9bb6c9;
+@define-color color13 #bcaac5;
+@define-color color14 #a2c4bf;
+@define-color color15 #dbdbdc;

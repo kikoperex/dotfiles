@@ -1,0 +1,7 @@
+# Estado generado por waybar/apply-theme.sh (no es configuración)
+waybar/themes/.current
+*.orig
+
+# Basura de sistema
+.DS_Store
+*~
