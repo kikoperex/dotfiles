@@ -8,12 +8,12 @@ vim.g.colors_name = "haz"
 
 -- HAZ — derivada de wallhaven-xe5pxo_3840x2160.png
 local colors = {
-    bg = "#121616",
+    bg = "#000000",
     fg = "#c7cace",
     black = "#191e1e",
 
     -- Rampa del wallpaper
-    void = "#0b0e0d",
+    void = "#000000",
     raised = "#212729",
     border = "#333c41",
     muted = "#838d95",

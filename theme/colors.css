@@ -2,12 +2,12 @@
  * Sombras verde-gris → humo azul → haz de plata.
  */
 
-@define-color background #121616;
+@define-color background #000000;
 @define-color foreground #c7cace;
 @define-color cursor #d8e6ea;
 
 /* Base semántica */
-@define-color void #0b0e0d;
+@define-color void #000000;
 @define-color surface #191e1e;
 @define-color raised #212729;
 @define-color border #333c41;

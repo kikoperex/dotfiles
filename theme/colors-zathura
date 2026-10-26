@@ -1,6 +1,6 @@
 # HAZ — derivada del wallpaper
 
-set default-bg "#121616"
+set default-bg "#000000"
 set default-fg "#c7cace"
 
 set statusbar-fg "#838d95"
@@ -27,5 +27,5 @@ set completion-fg "#838d95"
 set completion-highlight-fg "#0b0e0d"
 set completion-highlight-bg "#d8e6ea"
 
-set recolor-lightcolor "#121616"
+set recolor-lightcolor "#000000"
 set recolor-darkcolor "#c7cace"

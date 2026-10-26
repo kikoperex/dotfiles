@@ -1,0 +1,34 @@
+/* HAZ — Spotify */
+
+.Root__now-playing-bar {
+  border-top: 1px solid #333c41;
+}
+
+.main-trackList-trackListRow:hover {
+  background-color: rgba(216, 230, 234, 0.06);
+}
+
+.main-trackList-trackListRow.main-trackList-selected {
+  background-color: #212729;
+}
+
+.main-trackList-trackListRow.main-trackList-selected .main-trackList-trackListTitleCell {
+  color: #d8e6ea;
+}
+
+.main-trackList-trackListRow.main-trackList-selected .main-trackList-trackListRowIndex {
+  color: #9bb6c9;
+}
+
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #333c41;
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #838d95;
+}

@@ -1,0 +1,25 @@
+[[themes]]
+name = "haz"
+[themes.palette]
+background = "#000000"
+foreground = "#c7cace"
+black = "#141a19"
+red = "#c2665f"
+green = "#86a38c"
+yellow = "#bfa877"
+blue = "#7c97ab"
+magenta = "#9e8ba8"
+cyan = "#82a6a1"
+white = "#a6adb4"
+bright_black = "#3a4348"
+bright_red = "#d17a72"
+bright_green = "#9fbca5"
+bright_yellow = "#d8c29b"
+bright_blue = "#9bb6c9"
+bright_magenta = "#bcaac5"
+bright_cyan = "#a2c4bf"
+bright_white = "#dbdbdc"
+[themes.component_style]
+like = { fg = "#9fbca5", modifiers = ["Bold"] }
+selection = { bg = "#d8e6ea", fg = "#0b0e0d", modifiers = ["Bold"] }
+secondary_row = { bg = "#212729" }

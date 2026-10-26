@@ -1,0 +1,43 @@
+/* HAZ — overrides para GTK4 / libadwaita */
+
+@define-color accent_color #d8e6ea;
+@define-color accent_bg_color #d8e6ea;
+@define-color accent_fg_color #0b0e0d;
+
+@define-color window_bg_color #000000;
+@define-color window_fg_color #c7cace;
+@define-color view_bg_color #191e1e;
+@define-color view_fg_color #c7cace;
+@define-color headerbar_bg_color #191e1e;
+@define-color headerbar_fg_color #c7cace;
+@define-color headerbar_border_color #333c41;
+@define-color card_bg_color #191e1e;
+@define-color card_fg_color #c7cace;
+@define-color dialog_bg_color #191e1e;
+@define-color dialog_fg_color #c7cace;
+@define-color popover_bg_color #212729;
+@define-color popover_fg_color #c7cace;
+@define-color sidebar_bg_color #191e1e;
+@define-color sidebar_fg_color #c7cace;
+@define-color sidebar_border_color #333c41;
+
+@define-color destructive_color #d17a72;
+@define-color destructive_bg_color #c2665f;
+@define-color destructive_fg_color #0b0e0d;
+@define-color success_color #9fbca5;
+@define-color success_bg_color #86a38c;
+@define-color success_fg_color #0b0e0d;
+@define-color warning_color #d8c29b;
+@define-color warning_bg_color #bfa877;
+@define-color warning_fg_color #0b0e0d;
+@define-color error_color #d17a72;
+@define-color error_bg_color #c2665f;
+@define-color error_fg_color #0b0e0d;
+
+@define-color theme_bg_color #000000;
+@define-color theme_fg_color #c7cace;
+@define-color theme_base_color #191e1e;
+@define-color theme_text_color #c7cace;
+@define-color theme_selected_bg_color #d8e6ea;
+@define-color theme_selected_fg_color #0b0e0d;
+@define-color borders #333c41;

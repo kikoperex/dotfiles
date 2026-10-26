@@ -1,0 +1,24 @@
+/* HAZ — overrides para GTK3 (Adwaita) */
+
+@define-color theme_bg_color #000000;
+@define-color theme_fg_color #c7cace;
+@define-color theme_base_color #191e1e;
+@define-color theme_text_color #c7cace;
+@define-color theme_selected_bg_color #d8e6ea;
+@define-color theme_selected_fg_color #0b0e0d;
+@define-color theme_unfocused_bg_color #000000;
+@define-color theme_unfocused_fg_color #838d95;
+@define-color theme_unfocused_base_color #191e1e;
+@define-color theme_unfocused_text_color #c7cace;
+@define-color theme_unfocused_selected_bg_color #212729;
+@define-color theme_unfocused_selected_fg_color #d8e6ea;
+@define-color insensitive_bg_color #191e1e;
+@define-color insensitive_fg_color #5c666d;
+@define-color borders #333c41;
+@define-color unfocused_borders #333c41;
+@define-color warning_color #bfa877;
+@define-color error_color #c2665f;
+@define-color success_color #86a38c;
+@define-color link_color #9bb6c9;
+@define-color content_view_bg #191e1e;
+@define-color text_view_bg #191e1e;
