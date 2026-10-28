@@ -1,122 +1,383 @@
-/* HAZ — swaync */
+/* ═══════════════════════════════════════════════════════════════
+ *  swaync — HAZ
+ *
+ *  Misma gramática que waybar:
+ *   · superficies alpha sobre blur, no slabs opacos
+ *   · radios 4–5 px (Hyprland usa rounding = 5)
+ *   · un tono por urgencia; el acento solo marca foco/estado
+ *   · hairlines y sombras internas, sin marcos duros
+ *
+ *  Requiere en ~/.config/swaync/config.json:
+ *      "fit-to-screen": true,
+ *      "control-center-height": 640
+ *  y en Hyprland:
+ *      layerrule = blur on, ignore_alpha 0.5, match:namespace swaync-control-center
+ *      layerrule = blur on, ignore_alpha 0.5, match:namespace swaync-notification-window
+ * ═══════════════════════════════════════════════════════════════ */
 
-* {
-  font-family: "JetBrainsMono Nerd Font", monospace;
-  font-size: 13px;
+@import "/home/kikoperex/.config/theme/colors.css";
+
+:root {
+  --notification-icon-size: 64px;
+  --notification-app-icon-size: 21px;
+  --notification-group-icon-size: 32px;
 }
 
+* {
+  font-family: "JetBrainsMono Nerd Font Mono", "Noto Color Emoji", "JetBrains Mono", monospace;
+  font-size: 13px;
+  border: none;
+  border-radius: 0;
+  min-height: 0;
+  outline: none;
+}
+
+notificationwindow,
+blankwindow,
+.floating-notifications {
+  background: transparent;
+}
+
+/* ── Panel ──────────────────────────────────────────────────── */
 .control-center {
-  background: #000000;
-  border: 1px solid #333c41;
-  border-radius: 14px;
-  color: #c7cace;
+  background: alpha(@background, 0.6);
+  border: 1px solid alpha(@border, 0.75);
+  border-radius: 5px;
+  color: @text;
   padding: 10px;
+  /* línea interior, como la barra: separa sin gastar layout */
+  box-shadow: inset 0 1px 0 alpha(@border, 0.55);
 }
 
 .control-center-list {
   background: transparent;
 }
 
+.control-center-list-placeholder {
+  color: alpha(@muted, 0.75);
+  font-size: 13px;
+  opacity: 1;
+}
+
+.control-center-list-placeholder image {
+  -gtk-icon-size: 56px;
+  color: alpha(@muted, 0.55);
+}
+
+.control-center-list-placeholder label {
+  color: alpha(@muted, 0.8);
+  font-size: 13px;
+}
+
+/* Scrollbar fina, sin canal */
+scrollbar {
+  background: transparent;
+}
+
+scrollbar slider {
+  background: transparent;
+  border-radius: 999px;
+  min-width: 3px;
+  min-height: 24px;
+}
+
+scrollbar:hover slider {
+  background: alpha(@accent_dim, 0.65);
+}
+
+/* ── Widgets ────────────────────────────────────────────────── */
+.widget {
+  margin: 0;
+  padding: 0;
+}
+
+/* Título */
+.widget-title {
+  color: @white;
+  margin: 2px 2px 10px 2px;
+}
+
+.widget-title > label {
+  color: @white;
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+}
+
+.widget-title > button {
+  background: alpha(@raised, 0.9);
+  border: 1px solid alpha(@border, 0.8);
+  border-radius: 4px;
+  color: @text;
+  font-size: 13px;
+  padding: 4px 10px;
+  transition: background-color 180ms ease, border-color 180ms ease,
+              color 180ms ease;
+}
+
+.widget-title > button:hover {
+  background: alpha(@accent, 0.10);
+  border-color: alpha(@accent_dim, 0.8);
+  color: @white;
+}
+
+.widget-title > button:active {
+  background: @accent;
+  border-color: @accent;
+  color: @void;
+}
+
+.widget-title > button:focus {
+  border-color: @accent;
+  color: @white;
+}
+
+/* No molestar */
+.widget-dnd {
+  background: alpha(@raised, 0.55);
+  border: 1px solid alpha(@border, 0.55);
+  border-radius: 4px;
+  color: @text;
+  margin: 0 2px 10px 2px;
+  padding: 6px 9px;
+}
+
+.widget-dnd label {
+  color: @text;
+  font-size: 13px;
+  margin-right: 8px;
+}
+
+.widget-dnd switch {
+  background: alpha(@border, 0.9);
+  border: 1px solid alpha(@void, 0.5);
+  border-radius: 999px;
+  transition: background-color 180ms ease, border-color 180ms ease;
+}
+
+.widget-dnd switch:hover {
+  background: alpha(@border, 1);
+}
+
+.widget-dnd switch:checked {
+  background: alpha(@accent, 0.9);
+  border-color: @accent;
+}
+
+.widget-dnd switch:checked:hover {
+  background: @accent;
+}
+
+.widget-dnd switch:focus {
+  border-color: @white;
+}
+
+.widget-dnd switch slider {
+  background: @muted;
+  border-radius: 999px;
+  transition: background-color 180ms ease;
+}
+
+.widget-dnd switch:checked slider {
+  background: @void;
+}
+
+/* ── Notificaciones ─────────────────────────────────────────── */
 .notification-row {
   background: transparent;
-  outline: none;
 }
 
-.notification-background .notification {
-  background: #191e1e;
-  border: 1px solid #333c41;
-  border-radius: 10px;
-  padding: 2px;
+/* Sin doble gutter: las tarjetas llegan al padding del panel */
+.notification-row .notification-background {
+  padding: 0 0 8px 0;
 }
 
-.notification-background .notification.low {
-  border-left: 3px solid #7c97ab;
+.notification-row .notification-background .notification {
+  background: alpha(@surface, 0.95);
+  border: 1px solid alpha(@border, 0.7);
+  border-radius: 4px;
+  padding: 0;
+  transition: background-color 180ms ease, border-color 180ms ease;
 }
 
-.notification-background .notification.normal {
-  border-left: 3px solid #d8e6ea;
+/* Urgencia: barra interior que sigue el radio, no border-left cuadrado */
+.control-center .control-center-list .notification.low,
+.floating-notifications .notification.low {
+  box-shadow: inset 2px 0 0 alpha(@slate_hi, 0.85);
 }
 
-.notification-background .notification.critical {
-  border-left: 3px solid #d17a72;
+.control-center .control-center-list .notification.normal,
+.floating-notifications .notification.normal {
+  box-shadow: inset 2px 0 0 alpha(@accent_dim, 0.9);
+}
+
+.control-center .control-center-list .notification.critical,
+.floating-notifications .notification.critical {
+  background: alpha(@red, 0.08);
+  box-shadow: inset 2px 0 0 @red_hi;
+}
+
+/* Pila de grupo: solo la tarjeta superior conserva el borde fuerte */
+.notification-group.collapsed
+  .notification-row:not(:last-child)
+  .notification {
+  background: alpha(@raised, 0.8);
+  border-color: alpha(@border, 0.55);
+  box-shadow: none;
+}
+
+.notification-group:hover .notification:last-child {
+  border-color: alpha(@accent_dim, 0.55);
+}
+
+.notification-group:focus .notification:last-child {
+  border-color: @accent;
+}
+
+/* Contenido */
+.notification-default-action {
+  background: transparent;
+  border-radius: 4px;
+  padding: 6px 10px 6px 6px;
+  transition: background-color 180ms ease;
+}
+
+.notification-default-action:hover {
+  background: alpha(@raised, 0.9);
+}
+
+.notification-default-action:not(:only-child) {
+  border-bottom-left-radius: 0;
+  border-bottom-right-radius: 0;
 }
 
 .notification-content {
   background: transparent;
+  padding: 0;
+}
+
+.notification-content .image {
+  -gtk-icon-size: var(--notification-icon-size);
+  border-radius: 999px;
+  margin: 2px 10px 2px 2px;
+}
+
+.notification-content .app-icon {
+  -gtk-icon-size: var(--notification-app-icon-size);
+  margin: 2px;
+}
+
+.notification-content .body-image {
+  background: alpha(@raised, 0.6);
+  border-radius: 4px;
+  margin-top: 4px;
 }
 
 .summary {
-  color: #e6e8e9;
-  font-weight: bold;
+  color: @white;
+  font-size: 13px;
+  font-weight: 700;
 }
 
 .body {
-  color: #c7cace;
+  color: @text;
+  font-size: 13px;
 }
 
 .time {
-  color: #838d95;
+  color: alpha(@muted, 0.9);
+  font-size: 13px;
+  font-feature-settings: "tnum";
+  margin-right: 34px;
 }
 
+/* Acciones */
+.notification-action {
+  margin: 2px;
+  padding: 0;
+}
+
+.notification-action > button {
+  background: alpha(@raised, 0.9);
+  border: 1px solid alpha(@border, 0.7);
+  border-radius: 3px;
+  color: @text;
+  font-size: 13px;
+  padding: 5px 11px;
+  transition: background-color 180ms ease, border-color 180ms ease,
+              color 180ms ease;
+}
+
+.notification-action > button:hover {
+  background: alpha(@accent, 0.12);
+  border-color: alpha(@accent_dim, 0.8);
+  color: @white;
+}
+
+.notification-action > button:focus {
+  border-color: @accent;
+  color: @white;
+}
+
+.notification-alt-actions {
+  background: transparent;
+  padding: 0 6px 6px 6px;
+}
+
+/* Cerrar */
 .close-button {
-  background: #212729;
-  color: #c7cace;
-  border-radius: 50%;
-  margin: 4px;
-  min-width: 24px;
+  background: alpha(@raised, 0.85);
+  border: 1px solid transparent;
+  border-radius: 999px;
+  color: @muted;
+  margin: 5px;
   min-height: 24px;
+  min-width: 24px;
+  padding: 0;
+  transition: background-color 180ms ease, border-color 180ms ease,
+              color 180ms ease;
 }
 
 .close-button:hover {
-  background: #333c41;
-  color: #e6e8e9;
+  background: alpha(@red, 0.22);
+  border-color: alpha(@red_hi, 0.5);
+  color: @red_hi;
 }
 
-.notification-default-action:hover,
-.notification-action:hover {
-  background: #212729;
-  border-radius: 8px;
+.close-button:focus {
+  border-color: @accent;
+  color: @white;
 }
 
-.widget-title {
-  color: #e6e8e9;
-  font-weight: bold;
-  margin: 6px 4px 10px 4px;
-}
-
-.widget-title button {
-  background: #212729;
-  color: #c7cace;
-  border: 1px solid #333c41;
-  border-radius: 7px;
-  padding: 4px 10px;
-}
-
-.widget-title button:hover {
-  background: #333c41;
-  color: #e6e8e9;
-}
-
-.widget-dnd {
-  color: #c7cace;
-  margin: 4px;
-}
-
-.widget-dnd > switch {
-  background: #333c41;
-  border-radius: 12px;
-}
-
-.widget-dnd > switch:checked {
-  background: #d8e6ea;
-}
-
-.widget-dnd > switch slider {
-  background: #c7cace;
-  border-radius: 10px;
-}
-
-.control-center .notification-row:focus,
-.control-center .notification-row:hover {
+/* Teclado: el foco tiene que verse */
+.notification-row:focus {
   background: transparent;
+}
+
+.notification-row:focus .notification {
+  border-color: @accent;
+}
+
+.notification-row:focus .notification-default-action {
+  background: alpha(@raised, 0.9);
+}
+
+/* Progreso */
+progressbar trough {
+  background: alpha(@raised, 0.9);
+  border-radius: 999px;
+  min-height: 3px;
+}
+
+progressbar progress {
+  background: @accent;
+  border-radius: 999px;
+}
+
+/* ── Toasts ─────────────────────────────────────────────────── */
+.floating-notifications .notification {
+  background: alpha(@surface, 0.96);
+  border: 1px solid alpha(@border, 0.8);
+  border-radius: 4px;
+  box-shadow: 0 4px 16px alpha(@void, 0.45);
 }
