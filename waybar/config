@@ -3,16 +3,17 @@
     "position": "bottom",
     "height": 14,
     "spacing": 0,
-    "modules-left": ["hyprland/workspaces"],
+    "modules-left": ["ext/workspaces"],
     "modules-center": ["clock"],
     "modules-right": ["custom/recording", "cpu", "memory", "temperature", "pulseaudio", "network", "battery"],
     
-    "hyprland/workspaces": {
-        "disable-scroll": false,
+    "ext/workspaces": {
+        "format": "{name}",
+        "on-click": "activate",
         "all-outputs": true,
-        "format": "{id}",
         "active-only": false,
-        "show-special": false
+        "ignore-hidden": true,
+        "sort-by-name": true
     },
     
     "custom/recording": {
