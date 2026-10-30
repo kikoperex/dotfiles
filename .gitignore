@@ -2,6 +2,11 @@
 waybar/themes/.current
 *.orig
 
+# Archivos generados o respaldos locales (no versionar)
+nvim/plugin/packer_compiled.lua
+hypr/workflow.log
+yazi/keymap.toml-*
+
 # Basura de sistema
 .DS_Store
 *~

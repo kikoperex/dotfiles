@@ -13,10 +13,11 @@
 #                  |___/
 # "
 
-rm -rvf ly-session.log
-
 # If not running interactively, don't do anything
 [[ $- != *i* ]] && return
+
+# Limpieza silenciosa de la sesión anterior de ly
+rm -f -- "$HOME/ly-session.log"
 
 HISTCONTROL=ignoreboth
 shopt -s histappend
@@ -35,7 +36,7 @@ export PATH="$PATH:/home/kikoperex/.local/share/spotify-launcher/install/usr/bin
 # Quality of life improvempts
 alias ls='ls -hN --color=auto --group-directories-first'
 alias grep='grep --color=auto'
-alias setup='./.config/scripts/start-worflow.sh '
+alias setup='~/.config/scripts/start-workflow.sh'
 alias v=nvim
 alias vf="v ."
 alias i="sudo pacman -S --noconfirm"
