@@ -19,6 +19,7 @@ DRY_RUN=0
 WITH_PACKAGES=0
 WITH_NVIM=0
 ASSUME_YES=0
+SYSTEM_CHANGED=0
 BACKUP_ROOT="$HOME/.dotfiles-backup"
 BACKUP_DIR="$BACKUP_ROOT/$(date +%Y%m%d-%H%M%S)-$$"
 
@@ -46,6 +47,7 @@ usage() {
 ${C_BOLD}Uso:${C_RESET} ${0##*/} [opciones]
 
 Instala la configuración de ~/.dotfiles en el sistema.
+Los archivos de /etc (por ejemplo, keyd) se instalan con sudo.
 
   --link        crea enlaces simbólicos (opción por defecto)
   --copy        copia los archivos en vez de enlazarlos
@@ -120,6 +122,13 @@ HOME_LINKS=(
     ".bashrc|$HOME/.bashrc"
 )
 
+# Archivos del sistema (origen en el repo | destino absoluto). Requieren root:
+# se instalan como copia con sudo y se respalda el original si difiere. No se
+# enlazan para que no dependan de que /home esté montado al arrancar.
+SYSTEM_FILES=(
+    "keyd/default.conf|/etc/keyd/default.conf"
+)
+
 # Recursos: fondo de pantalla esperado por hyprpaper.conf
 ASSETS=(
     "assets/wallhaven-xe5pxo_3840x2160.png|$HOME/wallpapers/wallhaven-xe5pxo_3840x2160.png"
@@ -130,6 +139,8 @@ PACMAN_PKGS=(
     # Base del escritorio
     hyprland hyprpaper hyprlock hyprsunset
     waybar wofi swaync
+    # Teclado
+    keyd
     # Terminal / editor / utilidades
     kitty neovim tmux btop cava yazi zathura zathura-pdf-poppler
     dolphin gnome-calculator
@@ -255,6 +266,62 @@ install_path() {
     ok "~/$rel_dst copiado desde $rel_src"
 }
 
+# --- Archivos del sistema ---------------------------------------------------
+as_root() {
+    if (( EUID == 0 )); then
+        "$@"
+    else
+        sudo "$@"
+    fi
+}
+
+install_system_file() {
+    local src="$1" dst="$2"
+    local rel_src="${src#"$REPO"/}" rel_dst="$dst"
+
+    if [[ ! -e "$src" ]]; then
+        warn "no existe en el repositorio: $rel_src"
+        return 1
+    fi
+
+    if [[ -f "$dst" && ! -L "$dst" ]] && cmp -s -- "$src" "$dst"; then
+        skip "$rel_dst (idéntico)"
+        return 0
+    fi
+
+    if [[ "$DRY_RUN" -eq 1 ]]; then
+        info "[dry-run] $rel_dst <- $rel_src (sudo)"
+        [[ -e "$dst" || -L "$dst" ]] && info "[dry-run] respaldaría $rel_dst"
+        return 0
+    fi
+
+    if (( EUID != 0 )) && ! command -v sudo >/dev/null 2>&1; then
+        warn "sudo no está disponible; instala $rel_dst manualmente."
+        return 1
+    fi
+
+    # Valida la configuración de keyd antes de reemplazar la del sistema.
+    if [[ "$dst" == /etc/keyd/* ]] && command -v keyd >/dev/null 2>&1; then
+        if ! keyd check "$src" >/dev/null 2>&1; then
+            warn "keyd rechazó $rel_src; no se instala."
+            return 1
+        fi
+    fi
+
+    if [[ -e "$dst" || -L "$dst" ]]; then
+        local target="$BACKUP_DIR/${dst#/}"
+        ensure_backup_dir
+        mkdir -p -- "$(dirname -- "$target")"
+        as_root cp -a -- "$dst" "$target"
+        info "respaldo: $rel_dst -> ${target#"$HOME"/}"
+    fi
+
+    as_root mkdir -p -- "$(dirname -- "$dst")"
+    as_root install -m 644 -- "$src" "$dst"
+    SYSTEM_CHANGED=1
+    ok "$rel_dst <- $rel_src"
+}
+
 # --- Plan -------------------------------------------------------------------
 show_plan() {
     local mode_txt="enlaces simbólicos"
@@ -272,6 +339,10 @@ show_plan() {
         dst="${pair#*|}"
         printf '  ~/%s\n' "${dst#"$HOME"/}"
     done
+    printf '\n%sArchivos del sistema (sudo):%s\n' "$C_BOLD" "$C_RESET"
+    for pair in "${SYSTEM_FILES[@]}"; do
+        printf '  %s\n' "${pair#*|}"
+    done
     printf '\n'
 }
 
@@ -285,6 +356,7 @@ check_deps() {
         "waybar:waybar"
         "wofi:wofi"
         "swaync:swaync"
+        "keyd:keyd"
         "kitty:kitty"
         "nvim:neovim"
         "tmux:tmux"
@@ -432,6 +504,20 @@ main() {
         dst="${pair#*|}"
         install_path "$src" "$dst" || true
     done
+
+    info "Instalando archivos del sistema (pide sudo)..."
+    for pair in "${SYSTEM_FILES[@]}"; do
+        src="$REPO/${pair%%|*}"
+        dst="${pair#*|}"
+        install_system_file "$src" "$dst" || true
+    done
+    if [[ "$SYSTEM_CHANGED" -eq 1 ]] \
+       && command -v keyd >/dev/null 2>&1 \
+       && systemctl is-active --quiet keyd 2>/dev/null; then
+        as_root keyd reload >/dev/null 2>&1 \
+            && ok "keyd recargado." \
+            || warn "No se pudo recargar keyd; ejecuta: sudo keyd reload"
+    fi
 
     info "Preparando recursos y directorios de trabajo..."
     for pair in "${ASSETS[@]}"; do

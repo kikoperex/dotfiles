@@ -19,6 +19,9 @@ entender a profundidad como está construido mi propio entorno, y haciéndolo yo
 ## hyprland
 Elegí este gestor de ventanas en mosaico por que es rápido, fácilmente customizable, y sobre todo, muy bonito.
 
+## keyd
+Remapeo el teclado a nivel de sistema, así el mismo flujo funciona en Wayland, X y la TTY. Caps Lock hace Escape al pulsarlo solo y, al mantenerlo, abre una capa de navegación con h/j/k/l en lugar de flechas; con Alt recupera su función normal. La configuración del sistema vive en `/etc/keyd/default.conf` y el repositorio guarda una copia en `keyd/`, que `install.sh` instala con sudo y recarga el demonio.
+
 ## neovim
 Es el santo grial de esta configuración, todos los otros componetes están pensados para complementar a este editor de texto.
 Neovim permite la integración de plugins de la comunidad, lo que vuelve eficiente la integración con otras herramientas de desarrollo. Intento mantener la configuración simple, pero los plugins más importantes son Telescope, para la navegación fácil entre archivos, y vimtex, que me permite generar PDFs profesionales, en conjunto con Zathura, el visor de PDFs
