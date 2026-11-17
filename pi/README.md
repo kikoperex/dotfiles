@@ -7,6 +7,7 @@ Configuración personal de [Pi](https://pi.dev) versionada en este repositorio.
 - `settings.json`: proveedor, modelo y nivel de thinking por defecto.
 - `extensions/pi-tabs.ts`: tabs superiores persistentes y clickeables, `/new`, `/clear` y `/btw` flotante.
 - `extensions/subagent/`: extensión oficial de subagentes (single, parallel y chain).
+- `extensions/response-stats.ts`: al final de cada respuesta muestra tiempo, tokens/s y tokens usados.
 - `agents/`: definiciones de `scout`, `planner`, `reviewer` y `worker`.
 - `prompts/`: workflows `/implement`, `/scout-and-plan` e `/implement-and-review`.
 
