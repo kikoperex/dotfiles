@@ -48,3 +48,4 @@ x-scheme-handler/webcals=userapp-Thunderbird-BXV4T3.desktop
 text/calendar=userapp-Thunderbird-BXV4T3.desktop
 application/x-extension-ics=userapp-Thunderbird-BXV4T3.desktop
 x-scheme-handler/net.thunderbird=userapp-Thunderbird-UFXEU3.desktop
+x-scheme-handler/opencode=ai.opencode.desktop.desktop
