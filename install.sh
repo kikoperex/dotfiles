@@ -95,9 +95,9 @@ CONFIG_DIRS=(
     zathura
 )
 
-# Archivos sueltos (origen en el repo | destino absoluto). Se usa enlace por
-# archivo cuando el directorio de destino también guarda cosas ajenas al repo
-# (por ejemplo ~/.config/gtk-3.0/bookmarks).
+# Archivos y directorios individuales (origen en el repo | destino absoluto).
+# Se usa enlace por entrada cuando el directorio de destino también guarda
+# cosas ajenas al repo (por ejemplo ~/.config/gtk-3.0/bookmarks).
 FILE_LINKS=(
     "kdeglobals|$HOME/.config/kdeglobals"
     "mimeapps.list|$HOME/.config/mimeapps.list"
@@ -115,6 +115,11 @@ FILE_LINKS=(
     "spicetify/Themes/Haz/color.ini|$HOME/.config/spicetify/Themes/Haz/color.ini"
     "spicetify/Themes/Haz/user.css|$HOME/.config/spicetify/Themes/Haz/user.css"
     "color-schemes/Haz.colors|$HOME/.local/share/color-schemes/Haz.colors"
+    # Pi coding agent: configuración, extensiones, agentes y prompts
+    "pi/settings.json|$HOME/.pi/agent/settings.json"
+    "pi/extensions|$HOME/.pi/agent/extensions"
+    "pi/agents|$HOME/.pi/agent/agents"
+    "pi/prompts|$HOME/.pi/agent/prompts"
 )
 
 # Archivos que van directamente al HOME
@@ -333,7 +338,7 @@ show_plan() {
 
     printf '%sDirectorios en ~/.config:%s\n' "$C_BOLD" "$C_RESET"
     printf '  %s\n' "${CONFIG_DIRS[@]}"
-    printf '\n%sArchivos individuales:%s\n' "$C_BOLD" "$C_RESET"
+    printf '\n%sArchivos y directorios individuales:%s\n' "$C_BOLD" "$C_RESET"
     local pair dst
     for pair in "${FILE_LINKS[@]}" "${HOME_LINKS[@]}" "${ASSETS[@]}"; do
         dst="${pair#*|}"

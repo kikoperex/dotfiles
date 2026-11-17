@@ -10,3 +10,9 @@ yazi/keymap.toml-*
 # Basura de sistema
 .DS_Store
 *~
+
+# Pi: secretos y estado local (solo se versiona la configuración)
+pi/auth.json
+pi/sessions/
+pi/tab-decks/
+pi/models-store.json

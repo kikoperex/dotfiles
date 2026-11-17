@@ -47,3 +47,6 @@ Multiplexor de terminales flexible y personalizable, permitiendome hacer sesione
 
 ## pywal16
 Lo utilizo para generar colores acordes al fondo de pantalla, así no solo tengo un entorno eficiente, sino también bonito y placentero de usar.
+
+## pi
+Uso Pi como agente de programación en terminal. La configuración vive en `pi/` y `install.sh` la enlaza a `~/.pi/agent`: modelo por defecto, extensiones de tabs y subagentes, definiciones de agentes (`scout`, `planner`, `reviewer`, `worker`) y prompts de workflow. Las credenciales, sesiones y estado local no se versionan.
