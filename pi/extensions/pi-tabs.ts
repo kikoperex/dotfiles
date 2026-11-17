@@ -316,17 +316,10 @@ function currentTab(ctx: ExtensionCommandContext, deck: Deck): Tab | undefined {
 	return deck.tabs.find((tab) => tab.id === deck.activeId) ?? deck.tabs.find((tab) => tab.sessionFile === file);
 }
 
-function ensureIdle(ctx: ExtensionCommandContext, action: string): boolean {
-	if (ctx.isIdle()) return true;
-	ctx.ui.notify(`The current tab is still working. Wait or press Esc before ${action}.`, "warning");
-	return false;
-}
-
 async function activateTab(ctx: ExtensionCommandContext, target: Tab): Promise<void> {
 	const sessionDir = ctx.sessionManager.getSessionDir();
 	const deck = loadDeck(sessionDir);
 	if (target.id === deck.activeId) return;
-	if (!ensureIdle(ctx, "switching tabs")) return;
 
 	if (!existsSync(target.sessionFile)) {
 		ctx.ui.notify("That tab has no saved session yet. Send it a message first.", "warning");
@@ -367,7 +360,6 @@ async function activateIndex(ctx: ExtensionCommandContext, index: number): Promi
 }
 
 async function newTab(ctx: ExtensionCommandContext, name?: string): Promise<void> {
-	if (!ensureIdle(ctx, "opening a new tab")) return;
 	const sessionDir = ctx.sessionManager.getSessionDir();
 	const deck = loadDeck(sessionDir);
 	const id = `t${++deck.seq}`;
@@ -388,7 +380,6 @@ async function newTab(ctx: ExtensionCommandContext, name?: string): Promise<void
 }
 
 async function closeTab(ctx: ExtensionCommandContext): Promise<void> {
-	if (!ensureIdle(ctx, "closing the tab")) return;
 	const sessionDir = ctx.sessionManager.getSessionDir();
 	const deck = loadDeck(sessionDir);
 	const index = deck.tabs.findIndex((tab) => tab.id === deck.activeId);
@@ -435,7 +426,6 @@ async function closeTab(ctx: ExtensionCommandContext): Promise<void> {
 }
 
 async function clearTab(ctx: ExtensionCommandContext): Promise<void> {
-	if (!ensureIdle(ctx, "clearing the tab")) return;
 	const sessionDir = ctx.sessionManager.getSessionDir();
 	const deck = loadDeck(sessionDir);
 	const tab = currentTab(ctx, deck);
