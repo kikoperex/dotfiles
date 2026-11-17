@@ -91,6 +91,9 @@ hl.config({
     misc = {
         force_default_wallpaper = -1,
         disable_hyprland_logo = true,
+        -- Abrir un enlace no debe cambiar de workspace: Hyprland solo marca
+        -- la ventana como urgente y Waybar resalta su workspace.
+        focus_on_activate = false,
     },
 
     input = {
