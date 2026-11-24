@@ -58,6 +58,10 @@ play = [
 pdf = [
     { run = 'zathura %s', orphan = true, for = "unix" },
 ]
+html = [
+    { run = 'xdg-open %s', orphan = true, desc = "Open in browser", for = "linux" },
+    { run = 'open %s',     orphan = true, desc = "Open in browser", for = "macos" },
+]
 
 [open]
 rules = [
@@ -65,6 +69,8 @@ rules = [
     { mime = "application/pdf", use = [ "pdf", "reveal" ] },
     # Folder
     { mime = "folder/*", use = [ "edit", "open", "reveal" ] },
+    # HTML
+    { mime = "{text/html,application/xhtml+xml}", use = [ "html", "reveal" ] },
     # Text
     { mime = "text/*", use = [ "edit", "reveal" ] },
     # Image
